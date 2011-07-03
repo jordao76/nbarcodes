@@ -1,0 +1,1188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NBarCodes</name>
+    </assembly>
+    <members>
+        <member name="T:NBarCodes.Forms.BarCodeControlDesigner">
+            <summary>
+            Designer class for the <see cref="T:NBarCodes.Forms.BarCodeControl"/> class.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.Forms.BarCodeControlDesigner.PostFilterProperties(System.Collections.IDictionary)">
+            <summary>
+            Remove some basic properties that are not supported by the 
+            <see cref="T:NBarCodes.Forms.BarCodeControl"/>.
+            </summary>
+            <param name="properties">Collection of the control's properties.</param>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControlDesigner.SelectionRules">
+            <summary>
+            Defines the selection rules for the <see cref="T:NBarCodes.Forms.BarCodeControl"/>.
+            In particular, does not allow any resizing to occur.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.Modulo10Checksum">
+            <summary>
+            <see cref="T:NBarCodes.IChecksum"/> implementation that calculates a modulo 10 checksum
+            based on EAN-type or 2-of-5-type barcode checksums.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.IChecksum">
+            <summary>
+            Interface to calculate checksums on barcode data.
+            </summary>
+            <remarks>
+            Classes that calculate checksums on barcode data should implement this interface.
+            It makes for a pluggable checksum architecture.
+            </remarks>
+        </member>
+        <member name="M:NBarCodes.IChecksum.Calculate(System.String)">
+            <summary>
+            Calculates the checksum of a string of data.
+            </summary>
+            <param name="data">The data to calculate the checksum for.</param>
+            <returns>The calculated checksum.</returns>
+        </member>
+        <member name="M:NBarCodes.Modulo10Checksum.Calculate(System.String)">
+            <summary>
+            Calculates a modulo 10 checksum on the input data.
+            </summary>
+            <remarks>
+            <para>
+            This checksum digit calculation is based on a modulo 10 calculation of the weighted
+            sum of the values of each of the digits of the input data.
+            </para>
+            <para>
+            First, we take the rightmost digit of the value and consider it to be an "even" 
+            character. We then move right-to-left, alternating between even and odd. We then sum 
+            the numeric value of all the odd positions, and sum the numeric value multiplied by three 
+            of all the even positions. The check digit, then, is the number which, when added to the total 
+            calculated, results in a number evenly divisible by 10. If the sum is already evenly divisible 
+            by 10, the check digit is "0".
+            </para>
+            </remarks>
+            <param name="data">The data of which to calculate the checksum.</param>
+            <returns>The calculated checksum.</returns>
+        </member>
+        <member name="M:NBarCodes.Modulo10Checksum.AssertOnlyDigits(System.String)">
+            <summary>
+            Asserts that the data consists only of digits.
+            </summary>
+            <param name="data">Data to test.</param>
+        </member>
+        <member name="T:NBarCodes.BarCode">
+            <summary>
+            Base class for barcodes. Defines common functionality.
+            </summary>
+            <remarks>
+            This is the base class for creating barcodes, it defines common functionality like 
+            bar measures, text position and colors.
+            </remarks>
+        </member>
+        <member name="P:NBarCodes.BarCode.OffsetWidth">
+            <summary>
+            Gets or sets the margin offset width.
+            </summary>
+            <remarks>
+            Gets or sets the margin offset width of the barcode.
+            The side of the barcode (left or right) for which the margin offset width affects depends on the particular
+            barcode implementation.
+            </remarks>
+        </member>
+        <member name="P:NBarCodes.BarCode.OffsetHeight">
+            <summary>
+            Gets or sets the margin offset height.
+            </summary>
+            <remarks>
+            Gets or sets the margin offset height of the barcode.
+            The side of the barcode (top or bottom) for which the margin offset height affects depends on the particular
+            barcode implementation.
+            </remarks>
+        </member>
+        <member name="T:NBarCodes.IOptionalChecksum">
+            <summary>
+            Determines whether the checksum calculation in a barcode is optional.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IOptionalChecksum.UseChecksum">
+            <summary>
+            Determines whether the barcode will calculate a checksum on its data.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.UnitConverter">
+            <summary>
+            Class to convert between units of measure of barcodes 
+            (<see cref="T:NBarCodes.BarCodeType"/>).
+            </summary>
+        </member>
+        <member name="F:NBarCodes.UnitConverter.DEFAULT_DPI">
+            <summary>Default DPI of the rendering device (screen monitor).</summary>
+        </member>
+        <member name="M:NBarCodes.UnitConverter.#ctor">
+            <summary>Uninstantiatable.</summary>
+        </member>
+        <member name="M:NBarCodes.UnitConverter.Convert(System.Single,NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit)">
+            <summary>
+            Converts a value between measuring units.
+            The default DPI for convertions is set at 96.
+            </summary>
+            <param name="value">Value to be converted.</param>
+            <param name="sourceUnit">The unit to convert from.</param>
+            <param name="targetUnit">The unit to convert to.</param>
+            <returns>The converted unit.</returns>
+        </member>
+        <member name="M:NBarCodes.UnitConverter.Convert(System.Single,NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit,System.Single)">
+            <summary>
+            Converts a value between measuring units.
+            </summary>
+            <param name="value">Value to be converted.</param>
+            <param name="sourceUnit">The unit to convert from.</param>
+            <param name="targetUnit">The unit to convert to.</param>
+            <param name="dpi">The DPI of the rendering device.</param>
+            <returns>The converted unit.</returns>
+        </member>
+        <member name="T:NBarCodes.StringHelper">
+            <summary>
+            Utility class for common string operations.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.StringHelper.IsNullOrEmpty(System.String)">
+            <summary>
+            Determines if a string is null of empty. It's emptiness is
+            determined by first trimming it.
+            </summary>
+            <param name="stringToCheck">String to check for nullness or emptiness.</param>
+            <returns><c>True</c> if the string is null or empty, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:NBarCodes.BarCodeSettings">
+            <summary>
+            Packages settings for barcodes.
+            Canonical implementation of <see cref="T:NBarCodes.IBarCodeSettings"/>.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.IBarCodeSettings">
+            <summary>
+            Defines barcode settings.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.Type">
+            <summary>
+            The type of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.Data">
+            <summary>
+            The data to render with the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.Unit">
+            <summary>
+            The unit of measure of the barcode's measurable properties.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.BackColor">
+            <summary>
+            The back color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.BarColor">
+            <summary>
+            The color of the bar of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.BarHeight">
+            <summary>
+            The height of the barcode. Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.FontColor">
+            <summary>
+            The color of the font to render text in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.GuardExtraHeight">
+            <summary>
+            The height of the extra height of the bar for EAN like barcodes.
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.ModuleWidth">
+            <summary>
+            The width of bar of the barcode for module-based barcodes (<see cref="T:NBarCodes.ModuleBarCode"/>).
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.NarrowWidth">
+            <summary>
+            The width of the narrow component of a thickness-based barcode (<see cref="T:NBarCodes.ThicknessBarCode"/>).
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.WideWidth">
+            <summary>
+            The width of the wide component of a thickness-based barcode (<see cref="T:NBarCodes.ThicknessBarCode"/>).
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.OffsetHeight">
+            <summary>
+            The vertical (top and bottom) offset height of the barcode to the border.
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.OffsetWidth">
+            <summary>
+            The horizontal (left and right) offset width of the barcode to the border.
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.QuietZone">
+            <summary>
+            The width of the horizontal (left and right) quiet zone of the barcode.
+            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.Font">
+            <summary>
+            The font used to render the text inside the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.TextPosition">
+            <summary>
+            The position of the text rendered in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.IBarCodeSettings.UseChecksum">
+            <summary>
+            Whether the barcode will use an (optional) checksum.
+            Not every barcode requires a checksum, and others mandate it.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.Type">
+            <summary>
+            The type of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.Data">
+            <summary>
+            The data to render with the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.Unit">
+            <summary>
+            The unit of measure of the barcode's measurable properties.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.BackColor">
+            <summary>
+            The back color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.BarColor">
+            <summary>
+            The color of the bar of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.BarHeight">
+            <summary>
+            The height of the barcode. Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.FontColor">
+            <summary>
+            The color of the font to render text in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.GuardExtraHeight">
+            <summary>
+            The height of the extra height of the bar for EAN like barcodes.
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.ModuleWidth">
+            <summary>
+            The width of bar of the barcode for module-based barcodes (<see cref="T:NBarCodes.ModuleBarCode"/>).
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.NarrowWidth">
+            <summary>
+            The width of the narrow component of a thickness-based barcode (<see cref="T:NBarCodes.ThicknessBarCode"/>).
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.WideWidth">
+            <summary>
+            The width of the wide component of a thickness-based barcode (<see cref="T:NBarCodes.ThicknessBarCode"/>).
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.OffsetHeight">
+            <summary>
+            The vertical (top and bottom) offset height of the barcode to the border.
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.OffsetWidth">
+            <summary>
+            The horizontal (left and right) offset width of the barcode to the border.
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.QuietZone">
+            <summary>
+            The width of the horizontal (left and right) quiet zone of the barcode.
+            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.Font">
+            <summary>
+            The font used to render the text inside the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.TextPosition">
+            <summary>
+            The position of the text rendered in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.BarCodeSettings.UseChecksum">
+            <summary>
+            Whether the barcode will use an (optional) checksum.
+            Not every barcode requires a checksum, and others mandate it.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.Forms.BarCodeControl">
+            <summary>
+            Control to render bar codes.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.Forms.BarCodeControl.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.Forms.BarCodeControl"/>.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.Forms.BarCodeControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Renders the barcode.
+            </summary>
+            <param name="e">Paint event arguments.</param>
+        </member>
+        <member name="M:NBarCodes.Forms.BarCodeControl.DrawBarCode(System.Drawing.Graphics)">
+            <summary>
+            Draws the barcode in the canvas passed.
+            </summary>
+            <param name="canvas">Canvas to draw barcode into.</param>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.Type">
+            <summary>
+            The type of barcode to render.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.Data">
+            <summary>
+            The data to render in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.Unit">
+            <summary>
+            The unit to use when rendering the barcode. Affects all sizing properties.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.BackColor">
+            <summary>
+            The back color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.BarColor">
+            <summary>
+            The color of the bar of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.BarHeight">
+            <summary>
+            The height of the bar.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.FontColor">
+            <summary>
+            The font color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.GuardExtraHeight">
+            <summary>
+            The extra height of the guard on EAN or UPC barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.ModuleWidth">
+            <summary>
+            The width of a bar in module-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.NarrowWidth">
+            <summary>
+            The width of a narrow bar in thickness-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.WideWidth">
+            <summary>
+            The width of a wide bar in thickness-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.OffsetHeight">
+            <summary>
+            The height offset of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.OffsetWidth">
+            <summary>
+            The width offset of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.QuietZone">
+            <summary>
+            The quiet zone for the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.Font">
+            <summary>
+            The font of the barcode text.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.TextPosition">
+            <summary>
+            The position of the text.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.Forms.BarCodeControl.UseChecksum">
+            <summary>
+            Whether to use a checksum on barcodes where it is optional.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.WebUI.BarCodeHtmlHelper">
+            <summary>
+            Helper class to render HTML tags for barcodes. Useful from ASP.NET MVC.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.WebUI.BarCodeHtmlHelper.BarCode(NBarCodes.IBarCodeSettings,System.String)">
+            <summary>
+            Generates the barcode tags to render to barcode expressed in the input <paramref name="settings"/>.
+            </summary>
+            <param name="settings">Settings for the barcode to render.</param>
+            <param name="barCodeHandlerUrl">
+            URL for the barcode image rendering HTTP handler. 
+            Must be registered in web.config, pointing to <see cref="T:NBarCodes.WebUI.BarCodeHandler"/>.
+            </param>
+            <returns></returns>
+        </member>
+        <member name="T:NBarCodes.DebugStream">
+            <summary>
+            A <see cref="T:System.IO.Stream"/> decorator used to trace stream reads and writes.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.DebugStream.#ctor(System.String,System.IO.Stream)">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.DebugStream"/> class.
+            </summary>
+            <param name="title">A name to distinguish this stream.</param>
+            <param name="baseStream">The stream to be decorated by this stream.</param>
+            <exception cref="T:System.ArgumentNullException">
+            If the title or the base stream are null or the title is empty.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.DebugStream.Flush">
+            <summary>
+            Flushes the base stream's contents.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.DebugStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a chunk from the base stream.
+            </summary>
+            <param name="buffer">Buffer to store bytes read.</param>
+            <param name="offset">Offset into buffer to begin storing bytes read.</param>
+            <param name="count">Number of bytes to read.</param>
+            <returns>Number of bytes actually read.</returns>
+        </member>
+        <member name="M:NBarCodes.DebugStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the base stream.
+            </summary>
+            <param name="offset">Size of the position seek operation.</param>
+            <param name="origin">Where to seek from.</param>
+            <returns>The position set on the base stream.</returns>
+        </member>
+        <member name="M:NBarCodes.DebugStream.SetLength(System.Int64)">
+            <summary>
+            Sets the length of the base stream.
+            </summary>
+            <param name="value">New length to set.</param>
+        </member>
+        <member name="M:NBarCodes.DebugStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a number of bytes to the base stream.
+            </summary>
+            <param name="buffer">Buffer with bytes for writing.</param>
+            <param name="offset">Offset into the buffer.</param>
+            <param name="count">Number of bytes to read from the buffer and write to the stream.</param>
+        </member>
+        <member name="M:NBarCodes.DebugStream.LogMessage(System.String,System.Object[])">
+            <summary>
+            Logs a message to the <see cref="T:System.Diagnostics.Debug"/> class.
+            </summary>
+            <param name="message">Message to log, in the format of <see cref="M:System.String.Format(System.String,System.Object)"/>.</param>
+            <param name="parameters">Parameters to the positional elements of the message.</param>
+        </member>
+        <member name="F:NBarCodes.DebugStream._baseStream">
+            <summary>The decorated base stream.</summary>
+        </member>
+        <member name="F:NBarCodes.DebugStream._title">
+            <summary>The title of this stream.</summary>
+        </member>
+        <member name="P:NBarCodes.DebugStream.CanRead">
+            <summary>Determines whether the stream supports reading.</summary>
+        </member>
+        <member name="P:NBarCodes.DebugStream.CanSeek">
+            <summary>Determines whether the stream supports seeking.</summary>
+        </member>
+        <member name="P:NBarCodes.DebugStream.CanWrite">
+            <summary>Determines whether the stream supports writing.</summary>
+        </member>
+        <member name="P:NBarCodes.DebugStream.Length">
+            <summary>The length of the stream.</summary>
+        </member>
+        <member name="P:NBarCodes.DebugStream.Position">
+            <summary>The current position of the stream.</summary>
+        </member>
+        <member name="T:NBarCodes.HtmlBuilder">
+            <summary>
+            Builder to render barcodes in a pure-HTML &lt;div&gt; tag.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.IBarCodeBuilder">
+            <summary>
+            Builder interface to render barcodes.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.IBarCodeBuilder.Prepare(System.Single,System.Single)">
+            <summary>
+            Prepares the builder for rendering by properly setting the bounds of
+            the canvas surface to be used. Depends on the implementing class.
+            </summary>
+            <param name="width">Width of the canvas.</param>
+            <param name="height">Height of the canvas.</param>
+        </member>
+        <member name="M:NBarCodes.IBarCodeBuilder.DrawString(System.Drawing.Font,System.Drawing.Color,System.Boolean,System.String,System.Single,System.Single)">
+            <summary>
+            Draws a string of text.
+            </summary>
+            <param name="font">The font to use.</param>
+            <param name="fontColor">The color of the font.</param>
+            <param name="centered">Whether the text is centered.</param>
+            <param name="data">The data to print.</param>
+            <param name="x">The horizontal component of the start of the text.</param>
+            <param name="y">The vertical component of the start of the text.</param>
+        </member>
+        <member name="M:NBarCodes.IBarCodeBuilder.DrawRectangle(System.Drawing.Color,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Draws a rectangle. Used to draw bars.
+            </summary>
+            <param name="color">The fill color of the rectangle.</param>
+            <param name="x">The horizontal component of the start of the rectangle.</param>
+            <param name="y">The vertical component of the start of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="P:NBarCodes.IBarCodeBuilder.Unit">
+            <summary>
+            The unit used for rendering.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.TableEncoder">
+            <summary>
+            Encoder base class for table-lookup like encoders.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.ISymbolEncoder">
+            <summary>
+            Encoder interface for barcode symbols.
+            </summary>
+            <remarks>
+            Classes that encode barcode data into arrays of bits (<see cref="T:System.Collections.BitArray"/>) should
+            implement this interface.
+            </remarks>
+        </member>
+        <member name="M:NBarCodes.ISymbolEncoder.Encode(System.String)">
+            <summary>
+            Encodes a string of barcode data.
+            </summary>
+            <param name="data">The string of data to be encoded.</param>
+            <returns>The encoded data.</returns>
+        </member>
+        <member name="M:NBarCodes.ISymbolEncoder.Encode(System.Char)">
+            <summary>
+            Encodes a character of barcode data.
+            </summary>
+            <param name="datum">The character of data to be encoded.</param>
+            <returns>The encoded data.</returns>
+        </member>
+        <member name="M:NBarCodes.TableEncoder.LookUp(System.Int32)">
+            <summary>
+            Looks up the sought value and returns its encoded equivalent.
+            Should be properly overriden in derived classes.
+            </summary>
+            <param name="index">Index of the value to look up.</param>
+            <returns>The encoded data.</returns>
+        </member>
+        <member name="M:NBarCodes.TableEncoder.Encode(System.String)">
+            <summary>
+            Encodes a string of barcode data.
+            </summary>
+            <param name="data">The string of data to be encoded.</param>
+            <returns>The encoded data.</returns>
+        </member>
+        <member name="M:NBarCodes.TableEncoder.Encode(System.Char)">
+            <summary>
+            Encodes a character of barcode data. 
+            </summary>
+            <remarks>
+            This method uses the <see cref="M:NBarCodes.TableEncoder.LookUp(System.Int32)"/> method to resolve 
+            the character of data to an encoded entity (<see cref="T:System.Collections.BitArray"/>).
+            It assumes the datum passed represents a number and converts it before
+            looking it up.
+            </remarks>
+            <param name="datum">The character of data to be encoded.</param>
+            <returns>The encoded data.</returns>
+        </member>
+        <member name="F:NBarCodes.Code39Translator.mapping">
+            <summary>Mapping for all ascii codes less than 128.</summary>
+        </member>
+        <member name="T:NBarCodes.BarCodeType">
+            <summary>
+            Identifies the barcode types supported by the assembly.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Standard25">
+            <summary>
+            Standard 2 of 5 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Interleaved25">
+            <summary>
+            Interleaved 2 of 5 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Code39">
+            <summary>
+            Code 3 of 9 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Code128">
+            <summary>
+            Code 128 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Ean8">
+            <summary>
+            EAN-8 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Ean13">
+            <summary>
+            EAN-13 barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Upca">
+            <summary>
+            UPCA barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.Upce">
+            <summary>
+            UPCE barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeType.PostNet">
+            <summary>
+            Postnet barcode.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.NullBuilder">
+            <summary>
+            A null builder used to test barcode renderings (<see cref="M:NBarCodes.BarCode.TestRender(System.String,System.String@)"/>).
+            </summary>
+        </member>
+        <member name="T:NBarCodes.BitArrayHelper">
+            <summary>
+            Utility class for BitArray operations.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.BitArrayHelper.PopFront(System.Collections.BitArray[]@)">
+            <summary>
+            Removes the first <see cref="T:System.Collections.BitArray"/> of an array of
+            BitArrays and returns it.
+            </summary>
+            <param name="bits">Array of bit arrays to work on. On return, will lack the first element.</param>
+            <returns>The first element of the BitArray array parameter.</returns>
+        </member>
+        <member name="M:NBarCodes.BitArrayHelper.PopBack(System.Collections.BitArray[]@)">
+            <summary>
+            Removes the last <see cref="T:System.Collections.BitArray"/> of an array of
+            BitArrays and returns it.
+            </summary>
+            <param name="bits">Array of bit arrays to work on. On return, will lack the last element.</param>
+            <returns>The last element of the BitArray array parameter.</returns>
+        </member>
+        <member name="M:NBarCodes.BitArrayHelper.ToBitArray(System.String)">
+            <summary>
+            Converts a string of data consisting of '1's and '0's
+            into a <see cref="T:System.Collections.BitArray"/>.
+            </summary>
+            <param name="data">Input data.</param>
+            <returns>BitArray of input data.</returns>
+        </member>
+        <member name="M:NBarCodes.BitArrayHelper.ToBitMatrix(System.String[])">
+            <summary>
+            Converts an array of strings of data consisting of '1's and '0's
+            into an array of corresponding <see cref="T:System.Collections.BitArray"/>s.
+            </summary>
+            <param name="data">Input strings.</param>
+            <returns>Bit matrix (array of BitArrays) created.</returns>
+        </member>
+        <member name="T:NBarCodes.BarCodeHelper">
+            <summary>
+            A helper class that operates on <see cref="T:NBarCodes.IBarCodeSettings"/>
+            to provide barcode rendering and convertion services.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.TYPE_KEY">
+            <summary>Type of barcode key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.DATA_KEY">
+            <summary>Data key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.UNIT_KEY">
+            <summary>Unit key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.BACKCOLOR_KEY">
+            <summary>Back color key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.BARCOLOR_KEY">
+            <summary>Bar color key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.BARHEIGHT_KEY">
+            <summary>Bar haight key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.FONTCOLOR_KEY">
+            <summary>Font color key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.GUARDEXTRAHEIGHT_KEY">
+            <summary>Guard extra height key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.MODULEWIDTH_KEY">
+            <summary>Module width key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.NARROWWIDTH_KEY">
+            <summary>Narrow width key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.WIDEWIDTH_KEY">
+            <summary>Wide width key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.OFFSETHEIGHT_KEY">
+            <summary>Offset height key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.OFFSETWIDTH_KEY">
+            <summary>Offset width key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.QUIETZONE_KEY">
+            <summary>Quiet zone key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.FONT_KEY">
+            <summary>Font key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.TEXTPOSITION_KEY">
+            <summary>Text position key.</summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeHelper.USECHECKSUM_KEY">
+            <summary>Use checksum key.</summary>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.#ctor(NBarCodes.IBarCodeSettings)">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeHelper"/> class.
+            </summary>
+            <param name="settings">The settings to use.</param>
+            <exception cref="T:System.ArgumentNullException">
+            If the settings passed are <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.TestRender(System.String@)">
+            <summary>
+            Tests if the barcode would render with the given settings (<see cref="T:NBarCodes.IBarCodeSettings"/>), without format errors.
+            </summary>
+            <param name="errorMessage">Outputs the error message if a <see cref="T:NBarCodes.BarCodeFormatException"/> was thrown.</param>
+            <returns><c>True</c> if the barcode rendering test went ok, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.GenerateImage">
+            <summary>
+            Generates an image with the rendered barcode based on the settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
+            </summary>
+            <returns>The generated barcode image.</returns>
+            <exception cref="T:NBarCodes.BarCodeFormatException">
+            If the data in the settings can't be rendered by the selected barcode.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.GetBarCode">
+            <summary>
+            Instantiates the barcode type asked by the settings.
+            </summary>
+            <returns>The instantiated barcode type.</returns>
+            <exception cref="T:System.InvalidOperationException">
+            If the settings contain an invalid barcode type.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.AssembleBarCode">
+            <summary>
+            Instantiates and sets the barcode properties based on the settings.
+            </summary>
+            <returns>Instantiated and set up barcode.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.ParseQueryString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Parses a querystring-type parameter for <see cref="T:NBarCodes.IBarCodeSettings"/> properties.
+            The minimum properties expected are "Type", for the type of the barcode,
+            and "Data", for the data to render with the barcode.
+            </summary>
+            <param name="queryString">The collection of key-value pairs for parsing.</param>
+            <returns>The assembled <see cref="T:NBarCodes.IBarCodeSettings"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the querystring parameter is <c>null</c>.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            If the querystring parameter has any invalid property for the settings.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.ToQueryString">
+            <summary>
+            Formats and returns a query string for the settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
+            </summary>
+            <returns>Assembled querystring.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.UrlEncode(System.Object)">
+            <summary>
+            Url-encodes the input data.
+            </summary>
+            <param name="dataToEncode">Data to encode.</param>
+            <returns>Encoded data.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.CopySettings(NBarCodes.IBarCodeSettings,NBarCodes.IBarCodeSettings)">
+            <summary>
+            Copy settings between <see cref="T:NBarCodes.IBarCodeSettings"/>.
+            </summary>
+            <param name="settingsToCopyFrom">Settings to copy from.</param>
+            <param name="settingsToCopyTo">Settings to copy to.</param>
+        </member>
+        <member name="M:NBarCodes.BarCodeHelper.ConvertValues(NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit)">
+            <summary>
+            Converts and stores the settings' convertible properties to another unit of measure.
+            </summary>
+            <param name="fromUnit">The unit the settings properties are.</param>
+            <param name="toUnit">the unit to convert to.</param>
+        </member>
+        <member name="T:NBarCodes.BarCodeFormatException">
+            <summary>
+            The exception thrown when the barcode has an incorrect format.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.BarCodeFormatException.#ctor">
+            <overloads>
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeFormatException"/> class.
+            </summary>
+            </overloads>
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeFormatException"/> class.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.BarCodeFormatException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeFormatException"/> class with the given message.
+            </summary>
+            <param name="message">Error message of the exception.</param>
+        </member>
+        <member name="M:NBarCodes.BarCodeFormatException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeFormatException"/> class with the given message and 
+            the given inner exception.
+            </summary>
+            <param name="message">Error message of the exception.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:NBarCodes.ImageBuilder">
+            <summary>
+            Builder to render barcodes as images.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.ImageBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.Prepare(System.Single,System.Single)">
+            <summary>
+            Prepares the surface for rendering by allocating an image of the 
+            desirable dimensions, trimming than to reasonable defaults if
+            necessary.
+            </summary>
+            <param name="width">Width of the drawing canvas.</param>
+            <param name="height">Height of the drawing canvas.</param>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.DrawString(System.Drawing.Font,System.Drawing.Color,System.Boolean,System.String,System.Single,System.Single)">
+            <summary>
+            Draws a string of text.
+            </summary>
+            <param name="font">The font to use.</param>
+            <param name="fontColor">The color of the font.</param>
+            <param name="centered">Whether the text is centered.</param>
+            <param name="data">The data to print.</param>
+            <param name="x">The horizontal component of the start of the text.</param>
+            <param name="y">The vertical component of the start of the text.</param>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.DrawRectangle(System.Drawing.Color,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Draws a rectangle. Used to draw bars.
+            </summary>
+            <param name="color">The fill color of the rectangle.</param>
+            <param name="x">The horizontal component of the start of the rectangle.</param>
+            <param name="y">The vertical component of the start of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.GetImage">
+            <summary>
+            Used to retrieve the image built.
+            </summary>
+            <returns>The image of the rendered content.</returns>
+        </member>
+        <member name="M:NBarCodes.ImageBuilder.ConvertToPixels(System.Single)">
+            <summary>
+            Converts a value to pixels. The value is based on the unit stored in <see cref="P:NBarCodes.ImageBuilder.Unit"/>.
+            </summary>
+            <param name="value">Value to convert.</param>
+            <returns>Value converted to pixels.</returns>
+        </member>
+        <member name="P:NBarCodes.ImageBuilder.Unit">
+            <summary>
+            The unit to use when rendering.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.ImageBuilder.Dpi">
+            <summary>
+            The DPI (dots per inch) to use when rendering.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.WebUI.BarCodeControl">
+            <Documentation for="BarCodeControl">
+
+
+<summary>
+	A control to generate bar codes.
+</summary>
+
+<remarks>
+
+<para>
+	This control generates bar codes in a web page. It can
+	generate any bar code of a set of bar code types as images,
+	and it has many layout and behavior attributes.
+</para>
+
+<para>
+  This control needs a special http handler to be registered with the application
+  in order to work properly. This is an example for the relevant section in the 
+  web.config file that needs to be added:
+  
+  <code>
+
+    <httpHandlers>
+      <add verb="GET" path="BarCodeHandler.axd" type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
+    </httpHandlers>
+
+  </code>
+  
+</para>
+
+</remarks>
+
+
+</Documentation>
+        </member>
+        <member name="M:NBarCodes.WebUI.BarCodeControl.#ctor">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.WebUI.BarCodeControl"/> class.
+            Will validate the license of the control.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.WebUI.BarCodeControl.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output">The HTML writer to write out to.</param>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.Type">
+            <summary>
+            The type of the barcode to render.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.Data">
+            <summary>
+            The data to render in the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.Unit">
+            <summary>
+            The unit to use when rendering the barcode. Affects all sizing properties.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.BackColor">
+            <summary>
+            The back color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.BarColor">
+            <summary>
+            The color of the bar of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.BarHeight">
+            <summary>
+            The height of the bar.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.FontColor">
+            <summary>
+            The font color of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.GuardExtraHeight">
+            <summary>
+            The extra height of the guard on EAN or UPC barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.ModuleWidth">
+            <summary>
+            The width of a bar in module-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.NarrowWidth">
+            <summary>
+            The width of a narrow bar in thickness-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.WideWidth">
+            <summary>
+            The width of a wide bar in thickness-based barcodes.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.OffsetHeight">
+            <summary>
+            The height offset of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.OffsetWidth">
+            <summary>
+            The width offset of the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.QuietZone">
+            <summary>
+            The quiet zone for the barcode.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.Font">
+            <summary>
+            The font of the barcode text.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.TextPosition">
+            <summary>
+            The position of the text.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.UseChecksum">
+            <summary>
+            Whether to use a checksum on barcodes where it is optional.
+            </summary>
+        </member>
+        <member name="P:NBarCodes.WebUI.BarCodeControl.BarCodeHandlerUrl">
+            <summary>
+            Barcode HTTP handler URL.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.TextPosition">
+            <summary>
+            Enumeration to position string elements in barcodes.
+            </summary>
+            <remarks>
+            This enumeration positions string elements in barcodes. It has a Flags (<see cref="T:System.FlagsAttribute"/>)
+            attribute to allow for more than one option (through bitwise or).
+            </remarks>
+        </member>
+        <member name="F:NBarCodes.TextPosition.None">
+            <summary>
+            The text won't appear in the rendered barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.TextPosition.Top">
+            <summary>
+            The text will be rendered on top of the barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.TextPosition.Bottom">
+            <summary>
+            The text will be rendered on the bottom of the barcode.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.TextPosition.All">
+            <summary>
+            The text will be rendered on top and on the bottom of the barcode.
+            </summary>
+        </member>
+        <member name="T:NBarCodes.WebUI.BarCodeHandler">
+            <summary>
+            Http handler to generate bar code images.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.Code39.CalculateExtraWidth(System.Collections.BitArray[])">
+            <summary>
+            Calculates the extra width rendered with the space padding.
+            </summary>
+            <param name="symbols">Symbols to be encoded.</param>
+            <returns>Extra width rendered.</returns>
+        </member>
+        <member name="T:NBarCodes.BarCodeUnit">
+            <summary>
+            Identifies the unit of measure used in a barcode rendering.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeUnit.Centimeter">
+            <summary>
+            Centimeter unit.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeUnit.Millimeter">
+            <summary>
+            Millimeter unit.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeUnit.Inch">
+            <summary>
+            Inch unit.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.BarCodeUnit.Pixel">
+            <summary>
+            Pixel unit.
+            </summary>
+        </member>
+    </members>
+</doc>

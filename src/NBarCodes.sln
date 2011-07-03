@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBarCodes", "NBarCodes\NBarCodes.csproj", "{818A6862-6B8B-4F93-826E-D0CD8844BBA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBarCodes.Tests", "NBarCodes.Tests\NBarCodes.Tests.csproj", "{0A9123F5-0605-4D62-927F-A1F384509029}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{818A6862-6B8B-4F93-826E-D0CD8844BBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{818A6862-6B8B-4F93-826E-D0CD8844BBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{818A6862-6B8B-4F93-826E-D0CD8844BBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{818A6862-6B8B-4F93-826E-D0CD8844BBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9123F5-0605-4D62-927F-A1F384509029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9123F5-0605-4D62-927F-A1F384509029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9123F5-0605-4D62-927F-A1F384509029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9123F5-0605-4D62-927F-A1F384509029}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

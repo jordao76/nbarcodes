@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{818A6862-6B8B-4F93-826E-D0CD8844BBA4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>NBarCodes</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NBarCodes</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE;UNIT_TESTS</DefineConstants>
+    <DocumentationFile>NBarCodes.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>NBarCodes.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\BarCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code128\Code128.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code128\Code128Checksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code128\Code128Coder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code128\Code128Encoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code39\Code39.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code39\Code39Checksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\Code39\Code39Encoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\Ean13.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\Ean8.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\EanChecksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\EanEncoders.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\EanUpc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\EanUpcSupplement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\Upca.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\EanUpc\Upce.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\ModuleBarCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\PostNet\PostNet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\PostNet\PostNetChecksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\PostNet\PostNetEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\TextPosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\ThicknessBarCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\TwoOfFive\Base25.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\TwoOfFive\Encoder25.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\TwoOfFive\Interleaved25.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BarCodes\TwoOfFive\Standard25.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Builders\HtmlBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Builders\IBarCodeBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Builders\ImageBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Builders\NullBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Encoders\ISymbolEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Encoders\TableEncoder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtraTypes\BarCodeFormatException.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtraTypes\BarCodeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtraTypes\BarCodeUnit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtraTypes\IChecksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ExtraTypes\Modulo10Checksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\BarCodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\BarCodeControlDesigner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settings\BarCodeHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settings\BarCodeSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settings\IBarCodeSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\BitArrayHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\DebugStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\StringHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility\UnitConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebUI\BarCodeControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebUI\BarCodeControlDesigner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebUI\BarCodeHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebUI\BarCodeHtmlHelper.cs" />
+    <Content Include="WebUI\Documentation\BarCodeControl.xml" />
+    <EmbeddedResource Include="Forms\BarCodeControl.resx">
+      <DependentUpon>BarCodeControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent>xcopy "$(TargetDir)NBarCodes.*" "$(SolutionDir)..\bin" /Y</PostBuildEvent>
+  </PropertyGroup>
+</Project>

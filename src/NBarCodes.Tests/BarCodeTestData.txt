@@ -1,0 +1,90 @@
+# Expected format: 
+#		[Barcode reader], [Barcode type], [Barcode data], [Expected output]
+# e.g.: 
+#		ZXing, Code128, 1234567890
+#
+# Comments take a WHOLE line and begin with '#'
+# i.e.: you can't have a comment after a barcode definition
+# The expected output is optional and defaults to the barcode data
+#
+# Valid types are:
+#		Interleaved25,
+#		Standard25,
+#		Code39,
+#		Code128,
+#		Ean8,
+#		Ean13,
+#		Upca,
+#		Upce,
+#		Postnet
+#
+# Valid readers are:
+#   ZXing
+#   ZBar
+
+# test rendering with Code C
+ZXing, Code128, 00010203040506070809
+ZXing, Code128, 10111213141516171819
+ZXing, Code128, 20212223242526272829
+ZXing, Code128, 30313233343536373839
+ZXing, Code128, 40414243444546474849
+ZXing, Code128, 50515253545556575859
+ZXing, Code128, 60616263646566676869
+ZXing, Code128, 70717273747576777879
+ZXing, Code128, 80818283848586878889
+ZXing, Code128, 90919293949596979899
+ZXing, Code128, 1234567890
+
+# test rendering with Code A
+ZXing, Code128, ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ZXing, Code128, A1A2A3A4A5A6A7A8A9A0
+
+# test rendering with Code B
+ZXing, Code128, abcdefghijklmnopqrstuvwxyz
+ZXing, Code128, a1a2a3a4a5a6a7a8a9a0
+
+# test mixing codes
+#  (ACB)
+ZXing, Code128, ABCDEFGH12345678abcdefgh
+
+ZXing, Ean13, 1234567890128
+# supplements
+#ZXing, Ean13, 789054215421645
+#ZXing, Ean13, 789054215421645678
+
+ZXing, Ean8, 12345670
+
+ZXing, Upca, 123456789128
+
+ZXing, Upce, 01200000999, 01299900
+ZXing, Upce, 01210000999, 01299919
+ZXing, Upce, 01220000999, 01299928
+ZXing, Upce, 01230000099, 01239934
+ZXing, Upce, 01240000099, 01249933
+ZXing, Upce, 01234000009, 01234941
+ZXing, Upce, 01234500009, 01234596
+
+#ZBar, Standard25, 1234567890
+ZBar, Interleaved25, 1234567890
+ZBar, Interleaved25, 513452652389
+
+# test all interwoven numbers
+ZBar, Interleaved25, 00010203040506070809
+ZBar, Interleaved25, 10111213141516171819
+ZBar, Interleaved25, 20212223242526272829
+ZBar, Interleaved25, 30313233343536373839
+ZBar, Interleaved25, 40414243444546474849
+ZBar, Interleaved25, 50515253545556575859
+ZBar, Interleaved25, 60616263646566676869
+ZBar, Interleaved25, 70717273747576777879
+ZBar, Interleaved25, 80818283848586878889
+ZBar, Interleaved25, 90919293949596979899
+
+ZXing, Code39, 1234567890
+ZXing, Code39, 0123456789
+ZXing, Code39, ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ZXing, Code39, -. $/+%, -. /D/O/K/E
+
+#ZBar, PostNet, 12345
+#ZBar, PostNet, 123456789
+#ZBar, PostNet, 12345678901

@@ -1,0 +1,16 @@
+syntax: glob
+
+*.suo
+*.sln.cache
+*.csproj.user
+
+bin/*.dll
+bin/*.pdb
+bin/*.exe
+bin/*.config
+bin/*.xml
+
+syntax: regexp
+
+^src/.*/bin/.*
+^src/.*/obj/.*

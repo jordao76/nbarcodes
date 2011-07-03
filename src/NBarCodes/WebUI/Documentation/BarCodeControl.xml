@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<Documentation for="BarCodeControl">
+
+
+<summary>
+	A control to generate bar codes.
+</summary>
+
+<remarks>
+
+<para>
+	This control generates bar codes in a web page. It can
+	generate any bar code of a set of bar code types as images,
+	and it has many layout and behavior attributes.
+</para>
+
+<para>
+  This control needs a special http handler to be registered with the application
+  in order to work properly. This is an example for the relevant section in the 
+  web.config file that needs to be added:
+  
+  <code>
+
+    <httpHandlers>
+      <add verb="GET" path="BarCodeHandler.axd" 
+           type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
+    </httpHandlers>
+
+  </code>
+  
+</para>
+
+</remarks>
+
+
+</Documentation>
