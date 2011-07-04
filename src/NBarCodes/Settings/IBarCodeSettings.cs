@@ -8,8 +8,8 @@ namespace NBarCodes {
 	// NBarCodes.Forms.BarCodeControl
 	// BarCodeSettings
 	// (these are not so obvious)
-	// BarCodeHelper.ParseQueryString
-	// BarCodeHelper.ToQueryString
+	// QueryStringSerializer.ParseQueryString
+  // QueryStringSerializer.ToQueryString
 	// BarCode (and its descendants)
 
 	/// <summary>

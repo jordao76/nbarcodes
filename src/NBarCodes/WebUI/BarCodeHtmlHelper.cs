@@ -35,11 +35,11 @@ namespace NBarCodes.WebUI {
     internal static void RenderImageTag(HtmlTextWriter output, IBarCodeSettings settings, string barCodeHandlerUrl) {
       if (settings.Data != null && settings.Data.Trim().Length > 0) {
         string errorMessage;
-        var helper = new BarCodeHelper(settings);
-        if (helper.TestRender(out errorMessage)) {
+        var generator = new BarCodeGenerator(settings);
+        if (generator.TestRender(out errorMessage)) {
           HtmlImage htmlImage = new HtmlImage();
           htmlImage.Alt = settings.Data;
-          htmlImage.Src = GetBarCodeHandlerCall(helper, barCodeHandlerUrl);
+          htmlImage.Src = GetBarCodeHandlerCall(settings, barCodeHandlerUrl);
           htmlImage.RenderControl(output);
         }
         else {
@@ -51,11 +51,11 @@ namespace NBarCodes.WebUI {
       }
     }
 
-    private static string GetBarCodeHandlerCall(BarCodeHelper helper, string barCodeHandlerUrl) {
+    private static string GetBarCodeHandlerCall(IBarCodeSettings settings, string barCodeHandlerUrl) {
       return
         string.Format("{0}?{1}",
           barCodeHandlerUrl,
-          helper.ToQueryString());
+          QueryStringSerializer.ToQueryString(settings));
     }
   }
 

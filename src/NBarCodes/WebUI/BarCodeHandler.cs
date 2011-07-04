@@ -14,16 +14,16 @@ namespace NBarCodes.WebUI {
 
     void IHttpHandler.ProcessRequest(HttpContext context) {
 			IBarCodeSettings settings = 
-				BarCodeHelper.ParseQueryString(context.Request.QueryString);
+				QueryStringSerializer.ParseQueryString(context.Request.QueryString);
 
-			BarCodeHelper helper = new BarCodeHelper(settings);
+			BarCodeGenerator generator = new BarCodeGenerator(settings);
 
 			// TODO: put the image format in the settings??
 			ImageFormat imageFormat = ImageFormat.Png;
 			string contentType = GetContentType(imageFormat);
 			context.Response.ContentType = contentType;
 
-      using (var image = helper.GenerateImage()) 
+      using (var image = generator.GenerateImage()) 
       using (var ms = new MemoryStream()) {
         image.Save(ms, imageFormat);
         ms.Seek(0, SeekOrigin.Begin);

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NBarCodes.Tests {
 
 	/// <summary>
-	/// Unit test for the internal <b>Modulo10Checksum</b> class.
+	/// Unit test for the <b>Modulo10Checksum</b> class.
 	/// </summary>
 	[TestFixture]
 	public class Modulo10ChecksumTest {

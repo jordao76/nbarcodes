@@ -749,145 +749,6 @@
             <param name="data">Input strings.</param>
             <returns>Bit matrix (array of BitArrays) created.</returns>
         </member>
-        <member name="T:NBarCodes.BarCodeHelper">
-            <summary>
-            A helper class that operates on <see cref="T:NBarCodes.IBarCodeSettings"/>
-            to provide barcode rendering and convertion services.
-            </summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.TYPE_KEY">
-            <summary>Type of barcode key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.DATA_KEY">
-            <summary>Data key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.UNIT_KEY">
-            <summary>Unit key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.BACKCOLOR_KEY">
-            <summary>Back color key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.BARCOLOR_KEY">
-            <summary>Bar color key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.BARHEIGHT_KEY">
-            <summary>Bar haight key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.FONTCOLOR_KEY">
-            <summary>Font color key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.GUARDEXTRAHEIGHT_KEY">
-            <summary>Guard extra height key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.MODULEWIDTH_KEY">
-            <summary>Module width key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.NARROWWIDTH_KEY">
-            <summary>Narrow width key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.WIDEWIDTH_KEY">
-            <summary>Wide width key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.OFFSETHEIGHT_KEY">
-            <summary>Offset height key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.OFFSETWIDTH_KEY">
-            <summary>Offset width key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.QUIETZONE_KEY">
-            <summary>Quiet zone key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.FONT_KEY">
-            <summary>Font key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.TEXTPOSITION_KEY">
-            <summary>Text position key.</summary>
-        </member>
-        <member name="F:NBarCodes.BarCodeHelper.USECHECKSUM_KEY">
-            <summary>Use checksum key.</summary>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.#ctor(NBarCodes.IBarCodeSettings)">
-            <summary>
-            Creates a new instance of the <see cref="T:NBarCodes.BarCodeHelper"/> class.
-            </summary>
-            <param name="settings">The settings to use.</param>
-            <exception cref="T:System.ArgumentNullException">
-            If the settings passed are <c>null</c>.
-            </exception>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.TestRender(System.String@)">
-            <summary>
-            Tests if the barcode would render with the given settings (<see cref="T:NBarCodes.IBarCodeSettings"/>), without format errors.
-            </summary>
-            <param name="errorMessage">Outputs the error message if a <see cref="T:NBarCodes.BarCodeFormatException"/> was thrown.</param>
-            <returns><c>True</c> if the barcode rendering test went ok, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.GenerateImage">
-            <summary>
-            Generates an image with the rendered barcode based on the settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
-            </summary>
-            <returns>The generated barcode image.</returns>
-            <exception cref="T:NBarCodes.BarCodeFormatException">
-            If the data in the settings can't be rendered by the selected barcode.
-            </exception>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.GetBarCode">
-            <summary>
-            Instantiates the barcode type asked by the settings.
-            </summary>
-            <returns>The instantiated barcode type.</returns>
-            <exception cref="T:System.InvalidOperationException">
-            If the settings contain an invalid barcode type.
-            </exception>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.AssembleBarCode">
-            <summary>
-            Instantiates and sets the barcode properties based on the settings.
-            </summary>
-            <returns>Instantiated and set up barcode.</returns>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.ParseQueryString(System.Collections.Specialized.NameValueCollection)">
-            <summary>
-            Parses a querystring-type parameter for <see cref="T:NBarCodes.IBarCodeSettings"/> properties.
-            The minimum properties expected are "Type", for the type of the barcode,
-            and "Data", for the data to render with the barcode.
-            </summary>
-            <param name="queryString">The collection of key-value pairs for parsing.</param>
-            <returns>The assembled <see cref="T:NBarCodes.IBarCodeSettings"/>.</returns>
-            <exception cref="T:System.ArgumentNullException">
-            If the querystring parameter is <c>null</c>.
-            </exception>
-            <exception cref="T:System.InvalidOperationException">
-            If the querystring parameter has any invalid property for the settings.
-            </exception>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.ToQueryString">
-            <summary>
-            Formats and returns a query string for the settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
-            </summary>
-            <returns>Assembled querystring.</returns>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.UrlEncode(System.Object)">
-            <summary>
-            Url-encodes the input data.
-            </summary>
-            <param name="dataToEncode">Data to encode.</param>
-            <returns>Encoded data.</returns>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.CopySettings(NBarCodes.IBarCodeSettings,NBarCodes.IBarCodeSettings)">
-            <summary>
-            Copy settings between <see cref="T:NBarCodes.IBarCodeSettings"/>.
-            </summary>
-            <param name="settingsToCopyFrom">Settings to copy from.</param>
-            <param name="settingsToCopyTo">Settings to copy to.</param>
-        </member>
-        <member name="M:NBarCodes.BarCodeHelper.ConvertValues(NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit)">
-            <summary>
-            Converts and stores the settings' convertible properties to another unit of measure.
-            </summary>
-            <param name="fromUnit">The unit the settings properties are.</param>
-            <param name="toUnit">the unit to convert to.</param>
-        </member>
         <member name="T:NBarCodes.BarCodeFormatException">
             <summary>
             The exception thrown when the barcode has an incorrect format.
@@ -1183,6 +1044,152 @@
             <summary>
             Pixel unit.
             </summary>
+        </member>
+        <member name="T:NBarCodes.WebUI.QueryStringSerializer">
+            <summary>
+            Parses and formats bar code settings (<see cref="T:NBarCodes.IBarCodeSettings"/>)
+            as query strings.
+            </summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.TYPE_KEY">
+            <summary>Type of barcode key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.DATA_KEY">
+            <summary>Data key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.UNIT_KEY">
+            <summary>Unit key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.BACKCOLOR_KEY">
+            <summary>Back color key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.BARCOLOR_KEY">
+            <summary>Bar color key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.BARHEIGHT_KEY">
+            <summary>Bar haight key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.FONTCOLOR_KEY">
+            <summary>Font color key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.GUARDEXTRAHEIGHT_KEY">
+            <summary>Guard extra height key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.MODULEWIDTH_KEY">
+            <summary>Module width key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.NARROWWIDTH_KEY">
+            <summary>Narrow width key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.WIDEWIDTH_KEY">
+            <summary>Wide width key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.OFFSETHEIGHT_KEY">
+            <summary>Offset height key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.OFFSETWIDTH_KEY">
+            <summary>Offset width key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.QUIETZONE_KEY">
+            <summary>Quiet zone key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.FONT_KEY">
+            <summary>Font key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.TEXTPOSITION_KEY">
+            <summary>Text position key.</summary>
+        </member>
+        <member name="F:NBarCodes.WebUI.QueryStringSerializer.USECHECKSUM_KEY">
+            <summary>Use checksum key.</summary>
+        </member>
+        <member name="M:NBarCodes.WebUI.QueryStringSerializer.ParseQueryString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Parses a querystring-type parameter for <see cref="T:NBarCodes.IBarCodeSettings"/> properties.
+            The minimum properties expected are "Type", for the type of the barcode,
+            and "Data", for the data to render with the barcode.
+            </summary>
+            <param name="queryString">The collection of key-value pairs for parsing.</param>
+            <returns>The assembled <see cref="T:NBarCodes.IBarCodeSettings"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            If the querystring parameter is <c>null</c>.
+            </exception>
+            <exception cref="T:System.InvalidOperationException">
+            If the querystring parameter has any invalid property for the settings.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.WebUI.QueryStringSerializer.ToQueryString(NBarCodes.IBarCodeSettings)">
+            <summary>
+            Formats and returns a query string for the input settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
+            </summary>
+            <param name="settings">Input settings.</param>
+            <returns>Assembled querystring.</returns>
+        </member>
+        <member name="M:NBarCodes.WebUI.QueryStringSerializer.UrlEncode(System.Object)">
+            <summary>
+            Url-encodes the input data.
+            </summary>
+            <param name="dataToEncode">Data to encode.</param>
+            <returns>Encoded data.</returns>
+        </member>
+        <member name="T:NBarCodes.BarCodeGenerator">
+            <summary>
+            Operates on <see cref="T:NBarCodes.IBarCodeSettings"/>
+            to provide barcode rendering and conversion services.
+            </summary>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.#ctor(NBarCodes.IBarCodeSettings)">
+            <summary>
+            Creates a new instance of the <see cref="T:NBarCodes.BarCodeGenerator"/> class.
+            </summary>
+            <param name="settings">The settings to use.</param>
+            <exception cref="T:System.ArgumentNullException">
+            If the settings passed are <c>null</c>.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.TestRender(System.String@)">
+            <summary>
+            Tests if the barcode would render with the given settings (<see cref="T:NBarCodes.IBarCodeSettings"/>), without format errors.
+            </summary>
+            <param name="errorMessage">Outputs the error message if a <see cref="T:NBarCodes.BarCodeFormatException"/> was thrown.</param>
+            <returns><c>True</c> if the barcode rendering test went ok, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.GenerateImage">
+            <summary>
+            Generates an image with the rendered barcode based on the settings (<see cref="T:NBarCodes.IBarCodeSettings"/>).
+            </summary>
+            <returns>The generated barcode image.</returns>
+            <exception cref="T:NBarCodes.BarCodeFormatException">
+            If the data in the settings can't be rendered by the selected barcode.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.GetBarCode">
+            <summary>
+            Instantiates the barcode type asked by the settings.
+            </summary>
+            <returns>The instantiated barcode type.</returns>
+            <exception cref="T:System.InvalidOperationException">
+            If the settings contain an invalid barcode type.
+            </exception>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.AssembleBarCode">
+            <summary>
+            Instantiates and sets the barcode properties based on the settings.
+            </summary>
+            <returns>Instantiated and set up barcode.</returns>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.CopySettings(NBarCodes.IBarCodeSettings,NBarCodes.IBarCodeSettings)">
+            <summary>
+            Copy settings between <see cref="T:NBarCodes.IBarCodeSettings"/>.
+            </summary>
+            <param name="settingsToCopyFrom">Settings to copy from.</param>
+            <param name="settingsToCopyTo">Settings to copy to.</param>
+        </member>
+        <member name="M:NBarCodes.BarCodeGenerator.ConvertValues(NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit)">
+            <summary>
+            Converts and stores the settings' convertible properties to another unit of measure.
+            </summary>
+            <param name="fromUnit">The unit the settings properties are.</param>
+            <param name="toUnit">the unit to convert to.</param>
         </member>
     </members>
 </doc>

@@ -18,7 +18,7 @@ namespace NBarCodes.Forms {
 	public class BarCodeControl : Control, IBarCodeSettings {
 		private Font _errorFont;
 		private Brush _errorBrush;
-		private BarCodeHelper _helper;
+		private BarCodeGenerator _generator;
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="BarCodeControl"/>.
@@ -28,7 +28,7 @@ namespace NBarCodes.Forms {
 
 			_errorFont = new Font("Verdana", 9F, FontStyle.Bold);
 			_errorBrush = Brushes.Red;
-			_helper = new BarCodeHelper(this);
+			_generator = new BarCodeGenerator(this);
 
 			BackColor = Color.White;
 			Font = new Font("verdana", 8);
@@ -84,7 +84,7 @@ namespace NBarCodes.Forms {
 				BarCodeUnit oldUnit = _unit;
 				_unit = value; 
 				if (oldUnit != _unit) {
-					_helper.ConvertValues(oldUnit, _unit);
+					_generator.ConvertValues(oldUnit, _unit);
 					Refresh();
 				}
 			}
@@ -271,8 +271,8 @@ namespace NBarCodes.Forms {
 		/// <param name="canvas">Canvas to draw barcode into.</param>
 		public void DrawBarCode(Graphics canvas) {
 			string errorMessage;
-			if (_helper.TestRender(out errorMessage)) {
-        using (var barCodeImage = _helper.GenerateImage()) {
+			if (_generator.TestRender(out errorMessage)) {
+        using (var barCodeImage = _generator.GenerateImage()) {
           Size = new Size(barCodeImage.Width, barCodeImage.Height);
           canvas.DrawImage(barCodeImage, 0, 0);
         }

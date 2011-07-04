@@ -108,13 +108,15 @@
     <Compile Include="BarCodeFixture.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BarCodeHelperTest.cs" />
+    <Compile Include="BarCodeGeneratorTest.cs" />
     <Compile Include="BitArrayHelperTest.cs" />
     <Compile Include="ChecksumTestDriver.cs" />
     <Compile Include="Modulo10ChecksumTest.cs" />
+    <Compile Include="QueryStringSerializerTest.cs" />
     <Compile Include="Readers\IBarCodeReader.cs" />
     <Compile Include="Readers\ZBarBarCodeReader.cs" />
     <Compile Include="Readers\ZXingBarCodeReader.cs" />
+    <Compile Include="SettingsUtils.cs" />
     <Compile Include="TemporaryFile.cs" />
     <Compile Include="UnitConverterTest.cs" />
     <EmbeddedResource Include="BarCodeTestData.txt" />

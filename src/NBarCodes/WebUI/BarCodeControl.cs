@@ -15,7 +15,7 @@ namespace NBarCodes.WebUI {
 	 ToolboxData("<{0}:BarCodeControl runat=\"server\"></{0}:BarCodeControl>"),
 	 PersistChildren(false), ParseChildren(true)]
 	public class BarCodeControl : Control, IBarCodeSettings {
-		private BarCodeHelper _helper;
+		private BarCodeGenerator _generator;
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="BarCodeControl"/> class.
@@ -24,7 +24,7 @@ namespace NBarCodes.WebUI {
 		public BarCodeControl() {
 			//LicenseManager.Validate(typeof(BarCodeControl));
 
-			_helper = new BarCodeHelper(this);
+			_generator = new BarCodeGenerator(this);
 		}
 
 		#region Properties
@@ -80,7 +80,7 @@ namespace NBarCodes.WebUI {
 				BarCodeUnit oldUnit = Unit;
 				ViewState["Unit"] = value; 
 				if (oldUnit != value) {
-					_helper.ConvertValues(oldUnit, value);
+					_generator.ConvertValues(oldUnit, value);
 				}
 			}
 		}

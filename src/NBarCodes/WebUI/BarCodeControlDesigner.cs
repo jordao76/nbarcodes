@@ -27,14 +27,14 @@ namespace NBarCodes.WebUI {
 		public override string GetDesignTimeHtml() {
 			BarCodeControl bcc = (BarCodeControl)Component;
 
-			BarCodeHelper helper = new BarCodeHelper(bcc);
+			BarCodeGenerator generator = new BarCodeGenerator(bcc);
 
 			string errorMessage;
 			bool succeeded = 
-				helper.TestRender(out errorMessage);
+				generator.TestRender(out errorMessage);
 
 			if (succeeded) {
-        using (var image = helper.GenerateImage()) {
+        using (var image = generator.GenerateImage()) {
           // TODO: put the image format in the settings
           SaveBarCode(image, ImageFormat.Png);
           return GetImageHtml();

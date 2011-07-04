@@ -210,7 +210,7 @@
     <Compile Include="Forms\BarCodeControlDesigner.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Settings\BarCodeHelper.cs">
+    <Compile Include="Settings\BarCodeGenerator.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Settings\BarCodeSettings.cs">
@@ -241,6 +241,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="WebUI\BarCodeHtmlHelper.cs" />
+    <Compile Include="WebUI\QueryStringSerializer.cs" />
     <Content Include="WebUI\Documentation\BarCodeControl.xml" />
     <EmbeddedResource Include="Forms\BarCodeControl.resx">
       <DependentUpon>BarCodeControl.cs</DependentUpon>

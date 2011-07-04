@@ -10,19 +10,19 @@ using NUnit.Framework;
 namespace NBarCodes.Tests {
 
 	[TestFixture]
-	[Category("Smoke")]
+	[Category("Acceptance")]
 	public class BarCodeFixture {
 
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
     public void BarCodeGenerationTest(BarCodeTestInput input) {
 			Trace.WriteLine(string.Format("Testing: {0}, {1}", input.Type, input.Data));
 
-      BarCodeHelper helper = new BarCodeHelper(new BarCodeSettings { 
+      BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings { 
         Type = input.Type,
         Data = input.Data
       });
 
-      using (var image = helper.GenerateImage()) {
+      using (var image = generator.GenerateImage()) {
         // "recognize" the barcode
         var reader = CreateReader(input.Reader);
         var result = reader.ReadBarCode((Bitmap)image);
