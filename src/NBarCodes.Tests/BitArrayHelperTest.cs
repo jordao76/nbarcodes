@@ -48,7 +48,7 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Tests convertion from string to BitArray.
+		/// Tests conversion from string to BitArray.
 		/// </summary>
 		[Test]
 		public void TestToBitArray() {
@@ -58,7 +58,7 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Tests convertion from string with bad data to BitArray.
+		/// Tests conversion from string with bad data to BitArray.
 		/// </summary>
 		[Test]
 		[ExpectedException(typeof(ArgumentException))]
@@ -67,7 +67,7 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Tests convertion from string array to BitArray array.
+		/// Tests conversion from string array to BitArray array.
 		/// </summary>
 		[Test]
 		public void TestToBitMatrix() {

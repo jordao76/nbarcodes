@@ -34,7 +34,7 @@ namespace NBarCodes {
 				return manufacturer + product[4];
 			}
 
-			throw new BarCodeFormatException("Invalid convertion from Upca to Upce.");
+			throw new BarCodeFormatException("Invalid conversion from Upca to Upce.");
 		}
 
 		protected override void Draw(IBarCodeBuilder builder, string data) {

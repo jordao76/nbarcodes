@@ -11,7 +11,7 @@ namespace NBarCodes {
 		/// <summary>Default DPI of the rendering device (screen monitor).</summary>
 		private const float DEFAULT_DPI = 96f;
 
-		// convertion ratios
+		// conversion ratios
 		private const float IN2CM = 2.54f;					// inch to centimeter ratio
 		private const float CM2IN = 1/IN2CM;				// centimeter to inch ratio
 		private const float CM2MM = 10f;						// centimeter to millimeter ratio
@@ -20,7 +20,7 @@ namespace NBarCodes {
 		private const float MM2IN = 1/CM2MM*CM2IN;	// milimeter to inch ratio
 
 		// this table is indexed by the BarCodeUnit values
-		private static float[,] ConvertionTable = {
+		private static float[,] ConversionTable = {
 		/*				cm				mm				in	*/
 		/*cm*/	{ 1,				CM2MM,		CM2IN }, 
 		/*mm*/	{ MM2CM,		1,				MM2IN },
@@ -32,7 +32,7 @@ namespace NBarCodes {
 
 		/// <summary>
 		/// Converts a value between measuring units.
-		/// The default DPI for convertions is set at 96.
+		/// The default DPI for conversions is set at 96.
 		/// </summary>
 		/// <param name="value">Value to be converted.</param>
 		/// <param name="sourceUnit">The unit to convert from.</param>
@@ -77,7 +77,7 @@ namespace NBarCodes {
 				targetUnitIndex = (int)BarCodeUnit.Inch;
 			}
 
-			converted *= ConvertionTable [sourceUnitIndex, targetUnitIndex];
+			converted *= ConversionTable [sourceUnitIndex, targetUnitIndex];
 
 			return converted;
 		}

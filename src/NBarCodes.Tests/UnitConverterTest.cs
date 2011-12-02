@@ -12,11 +12,11 @@ namespace NBarCodes.Tests {
 	public class UnitConverterTest {
 
 		/// <summary>
-		/// Tests various convertions.
+		/// Tests various conversions.
 		/// </summary>
 		[Test]
-		public void TestConvertions() {
-			// tests convertions between cm, mm, inches and pixels
+		public void TestConversions() {
+			// tests conversions between cm, mm, inches and pixels
 			// with the default 96 DPI, 1 inch = 96 pixels
 
 			float temp = 0;
@@ -61,10 +61,10 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Tests various convertions with different DPIs.
+		/// Tests various conversions with different DPIs.
 		/// </summary>
 		[Test]
-		public void TestConvertionsWithDpi() {
+		public void TestConversionsWithDpi() {
 			float dpi = 312;
 			
 			float temp = 0;
@@ -88,7 +88,7 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Tests chained convertions.
+		/// Tests chained conversions.
 		/// </summary>
 		[Test]
 		public void TestChainedConversions() {
@@ -98,11 +98,11 @@ namespace NBarCodes.Tests {
 			int index = 0;
 			foreach (float value in values) {
 				float temp = value;
-				temp = ChainConvertions(temp, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, BarCodeUnit.Centimeter);
+				temp = ChainConversions(temp, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, BarCodeUnit.Centimeter);
 				AssertFloat(value, temp, epsilons[index]);
 
 				temp = value;
-				temp = ChainConvertions(temp, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Pixel, BarCodeUnit.Inch);
+				temp = ChainConversions(temp, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Pixel, BarCodeUnit.Inch);
 				AssertFloat(value, temp, epsilons[index]);
 
 				++index;
@@ -136,12 +136,12 @@ namespace NBarCodes.Tests {
 		}
 
 		/// <summary>
-		/// Chains a value through various convertions.
+		/// Chains a value through various conversions.
 		/// </summary>
 		/// <param name="value">Value to convert.</param>
-		/// <param name="units">Convertions to apply. The first unit is considered to be the value's current unit.</param>
+		/// <param name="units">Conversions to apply. The first unit is considered to be the value's current unit.</param>
 		/// <returns>Converted value.</returns>
-		private float ChainConvertions(float value, params BarCodeUnit[] units) {
+		private float ChainConversions(float value, params BarCodeUnit[] units) {
 			float temp = value;
 			for (int i = 1; i < units.Length; ++i) {
 				temp = UnitConverter.Convert(temp, units[i-1], units[i]);

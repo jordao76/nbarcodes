@@ -22,7 +22,7 @@ namespace NBarCodes.Tests.Readers {
 
     private BarCodeReaderResult ReadBarCode(string filePath) {
       var zbar = Process.Start(new ProcessStartInfo {
-        FileName = @"..\..\..\..\lib\ZBar-0.10\bin\zbarimg.exe",
+        FileName = @"..\..\..\..\lib\ZBar-0.10\zbarimg.exe",
         Arguments = "--quiet \"" + filePath + "\"",
         UseShellExecute = false,
         RedirectStandardOutput = true,
