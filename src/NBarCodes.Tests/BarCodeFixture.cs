@@ -9,13 +9,13 @@ using NUnit.Framework;
 
 namespace NBarCodes.Tests {
 
-	[TestFixture]
-	[Category("Acceptance")]
-	public class BarCodeFixture {
+  [TestFixture]
+  [Category("Acceptance")]
+  public class BarCodeFixture {
 
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
     public void BarCodeGenerationTest(BarCodeTestInput input) {
-			Trace.WriteLine(string.Format("Testing: {0}, {1}", input.Type, input.Data));
+      Trace.WriteLine(string.Format("Testing: {0}, {1}", input.Type, input.Data));
 
       BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings { 
         Type = input.Type,
@@ -30,7 +30,7 @@ namespace NBarCodes.Tests {
         Assert.AreEqual(input.Type, result.Type, "Type of barcode differs!");
         Assert.AreEqual(input.Expected, result.Data, "Barcode data differs!");
       }
-		}
+    }
 
     private IBarCodeReader CreateReader(string reader) {
       return (IBarCodeReader)Activator.CreateInstance(Type.GetType("NBarCodes.Tests.Readers." + reader + "BarCodeReader"));

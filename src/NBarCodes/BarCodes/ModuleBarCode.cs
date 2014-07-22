@@ -5,20 +5,20 @@ using System.ComponentModel;
 
 namespace NBarCodes {
 
-	[Serializable]
-	abstract class ModuleBarCode : BarCode {
+  [Serializable]
+  abstract class ModuleBarCode : BarCode {
     private float moduleWidth = 1;
 
-		public override void ImportSettings(BarCode barCode) {
-			base.ImportSettings(barCode);
-			if (barCode is ModuleBarCode) {
-				this.ModuleWidth = 
-					((ModuleBarCode)barCode).ModuleWidth;
-			}
-		}
+    public override void ImportSettings(BarCode barCode) {
+      base.ImportSettings(barCode);
+      if (barCode is ModuleBarCode) {
+        this.ModuleWidth = 
+          ((ModuleBarCode)barCode).ModuleWidth;
+      }
+    }
 
-		[DefaultValue(1f), NotifyParentProperty(true)]
-		public virtual float ModuleWidth {
+    [DefaultValue(1f), NotifyParentProperty(true)]
+    public virtual float ModuleWidth {
       get { return moduleWidth; }
       set { moduleWidth = value; }
     }
@@ -31,11 +31,11 @@ namespace NBarCodes {
       return x;
     }
 
-		protected float DrawSymbol(IBarCodeBuilder builder, float x, float y, float height, BitArray symbol) {
-			return DrawSymbol(builder, x, y, ModuleWidth, height, symbol, BarColor);
-		}
+    protected float DrawSymbol(IBarCodeBuilder builder, float x, float y, float height, BitArray symbol) {
+      return DrawSymbol(builder, x, y, ModuleWidth, height, symbol, BarColor);
+    }
 
-		internal static float DrawSymbol(IBarCodeBuilder builder, float x, float y, float moduleWidth, float height, BitArray symbol, Color barColor) {
+    internal static float DrawSymbol(IBarCodeBuilder builder, float x, float y, float moduleWidth, float height, BitArray symbol, Color barColor) {
       float start = x;
       bool wasSpace = true;
       foreach (bool bit in symbol) {
@@ -59,7 +59,7 @@ namespace NBarCodes {
 
       return x;
     }
-	
-	}
+  
+  }
 
 }

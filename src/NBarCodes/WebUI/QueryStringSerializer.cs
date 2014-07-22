@@ -57,7 +57,7 @@ namespace NBarCodes.WebUI {
     /// <param name="queryString">The collection of key-value pairs for parsing.</param>
     /// <returns>The assembled <see cref="IBarCodeSettings"/>.</returns>
     /// <exception cref="ArgumentNullException">
-    ///	If the querystring parameter is <c>null</c>.
+    ///  If the querystring parameter is <c>null</c>.
     /// </exception>
     /// <exception cref="InvalidOperationException">
     /// If the querystring parameter has any invalid property for the settings.

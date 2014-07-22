@@ -9,58 +9,58 @@ using NBarCodes.Forms;
 
 namespace NBarCodes.Samples.WinForms
 {
-	/// <summary>
-	/// Summary description for Form1.
-	/// </summary>
-	public class BarCodeForm : System.Windows.Forms.Form
-	{
-		private System.Windows.Forms.TextBox tbxData;
-		private System.Windows.Forms.ComboBox cboBarCodeType;
-		private System.Windows.Forms.Button btnGenerate;
-		private System.Drawing.Printing.PrintDocument printDocument;
-		private System.Windows.Forms.Button btnPrint;
+  /// <summary>
+  /// Summary description for Form1.
+  /// </summary>
+  public class BarCodeForm : System.Windows.Forms.Form
+  {
+    private System.Windows.Forms.TextBox tbxData;
+    private System.Windows.Forms.ComboBox cboBarCodeType;
+    private System.Windows.Forms.Button btnGenerate;
+    private System.Drawing.Printing.PrintDocument printDocument;
+    private System.Windows.Forms.Button btnPrint;
     private System.Windows.Forms.PrintDialog printDialog;
     private BarCodeControl barCodeControl1;
 
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+    /// <summary>
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.Container components = null;
 
-		public BarCodeForm()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
+    public BarCodeForm()
+    {
+      //
+      // Required for Windows Form Designer support
+      //
+      InitializeComponent();
 
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
-		}
+      //
+      // TODO: Add any constructor code after InitializeComponent call
+      //
+    }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    protected override void Dispose( bool disposing )
+    {
+      if( disposing )
+      {
+        if (components != null) 
+        {
+          components.Dispose();
+        }
+      }
+      base.Dispose( disposing );
+    }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+    #region Windows Form Designer generated code
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
       this.tbxData = new System.Windows.Forms.TextBox();
       this.cboBarCodeType = new System.Windows.Forms.ComboBox();
       this.btnGenerate = new System.Windows.Forms.Button();
@@ -140,47 +140,47 @@ namespace NBarCodes.Samples.WinForms
       this.ResumeLayout(false);
       this.PerformLayout();
 
-		}
-		#endregion
+    }
+    #endregion
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.Run(new BarCodeForm());
-		}
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    static void Main() 
+    {
+      Application.Run(new BarCodeForm());
+    }
 
-		private void BarCodeForm_Load(object sender, System.EventArgs e) {
-			BindBarCodeType();
-			RenderBarCode();
-		}
+    private void BarCodeForm_Load(object sender, System.EventArgs e) {
+      BindBarCodeType();
+      RenderBarCode();
+    }
 
-		private void BindBarCodeType() {
-			cboBarCodeType.DataSource = Enum.GetNames(typeof(BarCodeType));
-			cboBarCodeType.SelectedItem = cboBarCodeType.Items[(int)BarCodeType.Code128];
-		}
+    private void BindBarCodeType() {
+      cboBarCodeType.DataSource = Enum.GetNames(typeof(BarCodeType));
+      cboBarCodeType.SelectedItem = cboBarCodeType.Items[(int)BarCodeType.Code128];
+    }
 
-		private void RenderBarCode() {
-			barCodeControl1.Data = tbxData.Text;
-			barCodeControl1.Type = (BarCodeType)Enum.Parse(typeof(BarCodeType), cboBarCodeType.SelectedItem.ToString());
+    private void RenderBarCode() {
+      barCodeControl1.Data = tbxData.Text;
+      barCodeControl1.Type = (BarCodeType)Enum.Parse(typeof(BarCodeType), cboBarCodeType.SelectedItem.ToString());
       barCodeControl1.Refresh();
-		}
+    }
 
-		private void btnGenerate_Click(object sender, System.EventArgs e) {
-			RenderBarCode();
-		}
+    private void btnGenerate_Click(object sender, System.EventArgs e) {
+      RenderBarCode();
+    }
 
-		private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
-			barCodeControl1.DrawBarCode(e.Graphics);
-		}
+    private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
+      barCodeControl1.DrawBarCode(e.Graphics);
+    }
 
-		private void btnPrint_Click(object sender, System.EventArgs e) {
-			DialogResult userAction = printDialog.ShowDialog();
-			if (userAction == DialogResult.OK) {
-				printDocument.Print();
-			}
-		}
-	}
+    private void btnPrint_Click(object sender, System.EventArgs e) {
+      DialogResult userAction = printDialog.ShowDialog();
+      if (userAction == DialogResult.OK) {
+        printDocument.Print();
+      }
+    }
+  }
 }

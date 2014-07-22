@@ -5,11 +5,11 @@ using System.ComponentModel;
 
 namespace NBarCodes {
 
-	[Serializable]
-	abstract class EanUpc : ModuleBarCode {
+  [Serializable]
+  abstract class EanUpc : ModuleBarCode {
     private float guardExtraHeight = 10;
-		private const float supplementOffsetRatio = 5;
-		private float supplementOffset = 10;
+    private const float supplementOffsetRatio = 5;
+    private float supplementOffset = 10;
 
     protected readonly static BitArray LeftGuard = BitArrayHelper.ToBitArray("101");
     protected readonly static BitArray CenterGuard = BitArrayHelper.ToBitArray("01010");
@@ -18,31 +18,31 @@ namespace NBarCodes {
     protected readonly static ISymbolEncoder LeftOddEncoder = new EanLeftOddEncoder();
     protected readonly static ISymbolEncoder LeftEvenEncoder = new EanLeftEvenEncoder();
     protected readonly static ISymbolEncoder RightEncoder = new EanRightEncoder();
-		protected readonly static ISymbolEncoder ParityEncoder = new EanParityEncoder();
+    protected readonly static ISymbolEncoder ParityEncoder = new EanParityEncoder();
 
-		public override void ImportSettings(BarCode barCode) {
-			base.ImportSettings(barCode);
-			if (barCode is EanUpc) {
-				this.guardExtraHeight = 
-					((EanUpc)barCode).GuardExtraHeight;
-			}
-		}
+    public override void ImportSettings(BarCode barCode) {
+      base.ImportSettings(barCode);
+      if (barCode is EanUpc) {
+        this.guardExtraHeight = 
+          ((EanUpc)barCode).GuardExtraHeight;
+      }
+    }
 
-		public EanUpc() {
+    public EanUpc() {
       TextPosition = TextPosition.Bottom;
-			supplementOffset = base.ModuleWidth * supplementOffsetRatio;
-		}
+      supplementOffset = base.ModuleWidth * supplementOffsetRatio;
+    }
 
-		public override float ModuleWidth {
-			get { return base.ModuleWidth; }
-			set { 
-				base.ModuleWidth = value;
-				supplementOffset = base.ModuleWidth * supplementOffsetRatio;
-			}
-		}
+    public override float ModuleWidth {
+      get { return base.ModuleWidth; }
+      set { 
+        base.ModuleWidth = value;
+        supplementOffset = base.ModuleWidth * supplementOffsetRatio;
+      }
+    }
 
-		[DefaultValue(10f), NotifyParentProperty(true)]
-		public float GuardExtraHeight {
+    [DefaultValue(10f), NotifyParentProperty(true)]
+    public float GuardExtraHeight {
       get {
         if (TextPosition == TextPosition.None)
           return 0;
@@ -51,63 +51,63 @@ namespace NBarCodes {
       set { guardExtraHeight = value; }
     }
 
-		[Browsable(false),
-		 DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public float SupplementOffset {
-			get { return supplementOffset; }
-		}
+    [Browsable(false),
+     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public float SupplementOffset {
+      get { return supplementOffset; }
+    }
 
-		protected override float ExtraHeight {
-			get {
-				// guard height and text height overlap, so we get the bigger
-				float height; 
-				if (TextPosition != TextPosition.None) height = TextHeight;
-				else height = 0;
+    protected override float ExtraHeight {
+      get {
+        // guard height and text height overlap, so we get the bigger
+        float height; 
+        if (TextPosition != TextPosition.None) height = TextHeight;
+        else height = 0;
 
-				return GuardExtraHeight > height ? GuardExtraHeight : height;
-			}
-		}
+        return GuardExtraHeight > height ? GuardExtraHeight : height;
+      }
+    }
 
-		[DefaultValue(TextPosition.Bottom), NotifyParentProperty(true), RefreshProperties(RefreshProperties.Repaint)]
-		public override TextPosition TextPosition {
-			get { return base.TextPosition; }
-			set { 
-				if ((value & TextPosition.Top) != 0) {
-					throw new ArgumentException("TextPosition must be on bottom or none.");
-				}
-				base.TextPosition = value;
-			}
-		}
+    [DefaultValue(TextPosition.Bottom), NotifyParentProperty(true), RefreshProperties(RefreshProperties.Repaint)]
+    public override TextPosition TextPosition {
+      get { return base.TextPosition; }
+      set { 
+        if ((value & TextPosition.Top) != 0) {
+          throw new ArgumentException("TextPosition must be on bottom or none.");
+        }
+        base.TextPosition = value;
+      }
+    }
 
-		[Browsable(false),
-		 DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public abstract float TotalWidth { get; }
+    [Browsable(false),
+     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public abstract float TotalWidth { get; }
 
-		protected string Validate(string data, int fullLength) {
+    protected string Validate(string data, int fullLength) {
       // check for non digits
-			if (!new Regex(@"^\d+$").IsMatch(data))
-				throw new BarCodeFormatException("The barcode has non-numeric data.");
+      if (!new Regex(@"^\d+$").IsMatch(data))
+        throw new BarCodeFormatException("The barcode has non-numeric data.");
 
-			// check the length, it can be full or missing the check digit
-			if (data.Length < fullLength - 1 || data.Length > fullLength)
+      // check the length, it can be full or missing the check digit
+      if (data.Length < fullLength - 1 || data.Length > fullLength)
         throw new BarCodeFormatException("Invalid length for barcode.");
 
       // check or calculate and append the check digit
-			if (Checksum == null) {
-				Checksum = new Modulo10Checksum();
-			}
-			if (data.Length == fullLength) {
-				// check if the check digit in the string is right
-				string checksum = Checksum.Calculate(data.Substring(0, fullLength - 1));
+      if (Checksum == null) {
+        Checksum = new Modulo10Checksum();
+      }
+      if (data.Length == fullLength) {
+        // check if the check digit in the string is right
+        string checksum = Checksum.Calculate(data.Substring(0, fullLength - 1));
         if (data[fullLength - 1].ToString() != checksum)
           throw new BarCodeFormatException("Invalid check digit.");
       }
       else {
-				// append the check digit
+        // append the check digit
         data += Checksum.Calculate(data);
       }
 
-			return data;
+      return data;
     }
 
     protected internal static BitArray[] EncodeLeft(string data, BitArray parity) {
@@ -121,7 +121,7 @@ namespace NBarCodes {
       return bits;
     }
 
-		protected static BitArray[] EncodeRight(string data) {
+    protected static BitArray[] EncodeRight(string data) {
       BitArray[] bits = new BitArray[data.Length];
       for (int i = 0; i < data.Length; ++i) {
         bits[i] = RightEncoder.Encode(data[i]);
@@ -130,26 +130,26 @@ namespace NBarCodes {
       return bits;
     }
 
-		internal EanUpcSupplement ResolveSupplement(string supplement) {
-			EanUpcSupplement supp = null;
-			if (supplement != null && supplement.Length > 0) {
-				supp = EanUpcSupplement.GetSupplementBarCode(this, supplement);
-			}
-			return supp;
-		}
+    internal EanUpcSupplement ResolveSupplement(string supplement) {
+      EanUpcSupplement supp = null;
+      if (supplement != null && supplement.Length > 0) {
+        supp = EanUpcSupplement.GetSupplementBarCode(this, supplement);
+      }
+      return supp;
+    }
 
-		protected void Draw(IBarCodeBuilder builder, string data, int length) {
-			// TODO: BUG: account for digit! can have 6 different sizes:
-			// (2 supplements + 1 non-supp) * 2 modes (with or without digit)
-			if (data.Length > length) {
-				Draw(builder, data.Substring(0, length), data.Substring(length));
-			}
-			else {
-				Draw(builder, data, null);
-			}
-		}
+    protected void Draw(IBarCodeBuilder builder, string data, int length) {
+      // TODO: BUG: account for digit! can have 6 different sizes:
+      // (2 supplements + 1 non-supp) * 2 modes (with or without digit)
+      if (data.Length > length) {
+        Draw(builder, data.Substring(0, length), data.Substring(length));
+      }
+      else {
+        Draw(builder, data, null);
+      }
+    }
 
-		public abstract void Draw(IBarCodeBuilder builder, string data, string supplement);
-	}
+    public abstract void Draw(IBarCodeBuilder builder, string data, string supplement);
+  }
 
 }
