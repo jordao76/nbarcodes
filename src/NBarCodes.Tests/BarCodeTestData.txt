@@ -83,7 +83,7 @@ ZBar, Interleaved25, 90919293949596979899
 ZXing, Code39, 1234567890
 ZXing, Code39, 0123456789
 ZXing, Code39, ABCDEFGHIJKLMNOPQRSTUVWXYZ
-ZXing, Code39, -. $/+%, -. /D/O/K/E
+ZXing, Code39, -. $/+%, -. $/+%
 
 #ZBar, PostNet, 12345
 #ZBar, PostNet, 123456789

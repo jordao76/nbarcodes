@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Drawing;
-using com.google.zxing;
-using com.google.zxing.common;
+using ZXing;
+using ZXing.Common;
 using NBarCodes;
 
 namespace NBarCodes.Tests.Readers {
   class ZXingBarCodeReader : IBarCodeReader {
   
     public BarCodeReaderResult ReadBarCode(Bitmap image) {
-      var binarizer = new GlobalHistogramBinarizer(new RGBLuminanceSource(image, image.Width, image.Height));
-      var binaryBitmap = new BinaryBitmap(binarizer);
-      var reader = new MultiFormatReader();
-      var result = reader.decode(binaryBitmap);
+      var reader = new BarcodeReader();
+      var result = reader.Decode(image); 
       return new BarCodeReaderResult { 
         Data = result.Text, 
         Type = ConvertType(result.BarcodeFormat) 
