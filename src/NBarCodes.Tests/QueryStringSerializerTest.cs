@@ -62,6 +62,7 @@ namespace NBarCodes.Tests {
       querystring.Add(QueryStringSerializer.TYPE_KEY, inputSettings.Type.ToString());
       querystring.Add(QueryStringSerializer.DATA_KEY, inputSettings.Data);
       querystring.Add(QueryStringSerializer.UNIT_KEY, inputSettings.Unit.ToString());
+      querystring.Add(QueryStringSerializer.DPI_KEY, inputSettings.Dpi.ToString());
       querystring.Add(QueryStringSerializer.BACKCOLOR_KEY, inputSettings.BackColor.ToArgb().ToString());
       querystring.Add(QueryStringSerializer.BARCOLOR_KEY, inputSettings.BarColor.ToArgb().ToString());
       querystring.Add(QueryStringSerializer.BARHEIGHT_KEY, inputSettings.BarHeight.ToString());
@@ -113,6 +114,7 @@ namespace NBarCodes.Tests {
       StringAssert.Contains(MakePair(QueryStringSerializer.TYPE_KEY, settings.Type), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.DATA_KEY, settings.Data), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.UNIT_KEY, settings.Unit), queryString);
+      StringAssert.Contains(MakePair(QueryStringSerializer.DPI_KEY, settings.Dpi), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.BACKCOLOR_KEY, settings.BackColor.ToArgb()), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.BARCOLOR_KEY, settings.BarColor.ToArgb()), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.BARHEIGHT_KEY, settings.BarHeight), queryString);

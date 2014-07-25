@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace NBarCodes {
   
@@ -8,8 +9,18 @@ namespace NBarCodes {
   /// </summary>
   public sealed class UnitConverter {
 
-    /// <summary>Default DPI of the rendering device (screen monitor).</summary>
-    private const float DEFAULT_DPI = 96f;
+    private static int _screenDpi = 0;
+
+    /// <summary>The screen DPI, rounded up to the nearest integer.</summary>
+    public static int ScreenDpi {
+      get {
+        if (_screenDpi > 0) return _screenDpi;
+        using (Bitmap image = new Bitmap(1, 1))
+        using (Graphics g = Graphics.FromImage(image)) {
+          return _screenDpi = (int)Math.Ceiling(g.DpiX); // DpiY is assumed to be equal to DpiX
+        }
+      }
+    }
 
     // conversion ratios
     private const float IN2CM = 2.54f;          // inch to centimeter ratio
@@ -32,25 +43,14 @@ namespace NBarCodes {
 
     /// <summary>
     /// Converts a value between measuring units.
-    /// The default DPI for conversions is set at 96.
+    /// If the target unit is pixels, the converted value is rounded up to the nearest integer.
     /// </summary>
     /// <param name="value">Value to be converted.</param>
     /// <param name="sourceUnit">The unit to convert from.</param>
     /// <param name="targetUnit">The unit to convert to.</param>
+    /// <param name="dpi">The DPI to use.</param>
     /// <returns>The converted unit.</returns>
-    public static float Convert(float value, BarCodeUnit sourceUnit, BarCodeUnit targetUnit) {
-      return Convert(value, sourceUnit, targetUnit, DEFAULT_DPI);
-    }
-
-    /// <summary>
-    /// Converts a value between measuring units.
-    /// </summary>
-    /// <param name="value">Value to be converted.</param>
-    /// <param name="sourceUnit">The unit to convert from.</param>
-    /// <param name="targetUnit">The unit to convert to.</param>
-    /// <param name="dpi">The DPI of the rendering device.</param>
-    /// <returns>The converted unit.</returns>
-    public static float Convert(float value, BarCodeUnit sourceUnit, BarCodeUnit targetUnit, float dpi) {
+    public static float Convert(float value, BarCodeUnit sourceUnit, BarCodeUnit targetUnit, int dpi) {
       if (dpi <= 0) {
         throw new ArgumentException("DPI must be greater than zero.");
       }
@@ -79,8 +79,36 @@ namespace NBarCodes {
 
       converted *= ConversionTable [sourceUnitIndex, targetUnitIndex];
 
+      if (targetUnit == BarCodeUnit.Pixel) {
+        converted = (float)Math.Ceiling(converted);
+      }
+
       return converted;
     }
 
+    /// <summary>
+    /// Convert a value to another DPI.
+    /// If the value is in a non-pixel unit, the same value is returned to maintain the aspect ratio. 
+    /// Pixel units are rounded up to the nearest integer.
+    /// </summary>
+    /// <param name="value">Value to convert.</param>
+    /// <param name="unit">Value unit.</param>
+    /// <param name="fromDpi">The current DPI of the value.</param>
+    /// <param name="toDpi">The target DPI for conversion.</param>
+    /// <returns>The value in the new DPI.</returns>
+    public static float ConvertDpi(float value, BarCodeUnit unit, int fromDpi, int toDpi) {
+      if (fromDpi <= 0 || toDpi <= 0) {
+        throw new ArgumentException("DPIs must be greater than zero.");
+      }
+
+      if (unit != BarCodeUnit.Pixel) {
+        return value;
+      }
+
+      var ratio = toDpi / (float)fromDpi;
+      return (float)Math.Ceiling(value * ratio);
+    }
+
   }
+
 }

@@ -82,6 +82,7 @@ namespace NBarCodes {
     private BarCode AssembleBarCode() {
       BarCode barCode = GetBarCode();
       barCode.Unit = _settings.Unit;
+      barCode.Dpi = _settings.Dpi;
       barCode.BarHeight = _settings.BarHeight;
       barCode.OffsetWidth = _settings.OffsetWidth;
       barCode.OffsetHeight = _settings.OffsetHeight;
@@ -140,14 +141,32 @@ namespace NBarCodes {
     /// <param name="fromUnit">The unit the settings properties are.</param>
     /// <param name="toUnit">the unit to convert to.</param>
     public void ConvertValues(BarCodeUnit fromUnit, BarCodeUnit toUnit) {
-      _settings.BarHeight = UnitConverter.Convert(_settings.BarHeight, fromUnit, toUnit);
-      _settings.GuardExtraHeight = UnitConverter.Convert(_settings.GuardExtraHeight, fromUnit, toUnit);
-      _settings.ModuleWidth = UnitConverter.Convert(_settings.ModuleWidth, fromUnit, toUnit);
-      _settings.NarrowWidth = UnitConverter.Convert(_settings.NarrowWidth, fromUnit, toUnit);
-      _settings.WideWidth = UnitConverter.Convert(_settings.WideWidth, fromUnit, toUnit);
-      _settings.OffsetHeight = UnitConverter.Convert(_settings.OffsetHeight, fromUnit, toUnit);
-      _settings.OffsetWidth = UnitConverter.Convert(_settings.OffsetWidth, fromUnit, toUnit);
-      _settings.QuietZone = UnitConverter.Convert(_settings.QuietZone, fromUnit, toUnit);
+      int dpi = _settings.Dpi;
+      _settings.BarHeight = UnitConverter.Convert(_settings.BarHeight, fromUnit, toUnit, dpi);
+      _settings.GuardExtraHeight = UnitConverter.Convert(_settings.GuardExtraHeight, fromUnit, toUnit, dpi);
+      _settings.ModuleWidth = UnitConverter.Convert(_settings.ModuleWidth, fromUnit, toUnit, dpi);
+      _settings.NarrowWidth = UnitConverter.Convert(_settings.NarrowWidth, fromUnit, toUnit, dpi);
+      _settings.WideWidth = UnitConverter.Convert(_settings.WideWidth, fromUnit, toUnit, dpi);
+      _settings.OffsetHeight = UnitConverter.Convert(_settings.OffsetHeight, fromUnit, toUnit, dpi);
+      _settings.OffsetWidth = UnitConverter.Convert(_settings.OffsetWidth, fromUnit, toUnit, dpi);
+      _settings.QuietZone = UnitConverter.Convert(_settings.QuietZone, fromUnit, toUnit, dpi);
+    }
+
+    /// <summary>
+    /// Converts the DPI for all convertible properties.
+    /// <param name="fromDpi">DPI to convert from.</param>
+    /// <param name="toDpi">DPI to convert to.</param>
+    /// </summary>
+    public void ConvertDpi(int fromDpi, int toDpi) {
+      var unit = _settings.Unit;
+      _settings.BarHeight = UnitConverter.ConvertDpi(_settings.BarHeight, unit, fromDpi, toDpi);
+      _settings.GuardExtraHeight = UnitConverter.ConvertDpi(_settings.GuardExtraHeight, unit, fromDpi, toDpi);
+      _settings.ModuleWidth = UnitConverter.ConvertDpi(_settings.ModuleWidth, unit, fromDpi, toDpi);
+      _settings.NarrowWidth = UnitConverter.ConvertDpi(_settings.NarrowWidth, unit, fromDpi, toDpi);
+      _settings.WideWidth = UnitConverter.ConvertDpi(_settings.WideWidth, unit, fromDpi, toDpi);
+      _settings.OffsetHeight = UnitConverter.ConvertDpi(_settings.OffsetHeight, unit, fromDpi, toDpi);
+      _settings.OffsetWidth = UnitConverter.ConvertDpi(_settings.OffsetWidth, unit, fromDpi, toDpi);
+      _settings.QuietZone = UnitConverter.ConvertDpi(_settings.QuietZone, unit, fromDpi, toDpi);
     }
 
     IBarCodeSettings _settings;

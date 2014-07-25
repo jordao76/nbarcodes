@@ -13,12 +13,11 @@ namespace NBarCodes {
     private const int MAX_HEIGHT = 700;
     private const int MIN_WIDTH = 50;
     private const int MIN_HEIGHT = 35;
-    private const float DEFAULT_DPI = 96f;
 
     private Bitmap _barCodeImage;
     private StringFormat _drawFormat;
     private BarCodeUnit _unit;
-    private float _dpi;
+    private int _dpi;
 
     /// <summary>
     /// Creates a new instance of the <see cref="ImageBuilder"/> class.
@@ -27,7 +26,7 @@ namespace NBarCodes {
       _drawFormat = new StringFormat();
       _drawFormat.Alignment = StringAlignment.Center;
       _unit = BarCodeUnit.Pixel;
-      _dpi = DEFAULT_DPI;
+      _dpi = UnitConverter.ScreenDpi;
     }
 
     /// <summary>
@@ -38,11 +37,10 @@ namespace NBarCodes {
       set { _unit = value; }
     }
 
-    // TODO: put DPI in interface!!
     /// <summary>
     /// The DPI (dots per inch) to use when rendering.
     /// </summary>
-    public float Dpi {
+    public int Dpi {
       get { return _dpi; }
       set { _dpi = value; }
     }
@@ -77,8 +75,8 @@ namespace NBarCodes {
         heightInPixels = MIN_HEIGHT;
       }
 
-      // TODO: check for Bitmap constructor that takes Graphics for setting DPI!!
       _barCodeImage = new Bitmap(widthInPixels, heightInPixels);
+      _barCodeImage.SetResolution(_dpi, _dpi);
     }
 
     /// <summary>

@@ -6,6 +6,11 @@ namespace NBarCodes {
   /// Builder interface to render barcodes.
   /// </summary>
   interface IBarCodeBuilder {
+
+    /// <summary>
+    /// The DPI (dots per inch) used for rendering.
+    /// </summary>
+    int Dpi { get; set; }
     
     /// <summary>
     /// The unit used for rendering.

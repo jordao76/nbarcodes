@@ -26,6 +26,7 @@ namespace NBarCodes {
     private Color fontColor = Color.Black;
     private Font font = new Font("verdana", 8);
     private BarCodeUnit unit = BarCodeUnit.Pixel;
+    private int dpi = UnitConverter.ScreenDpi;
 
     public virtual void ImportSettings(BarCode barCode) {
       barHeight = barCode.barHeight;
@@ -149,9 +150,10 @@ namespace NBarCodes {
       get {
         if (textPosition != TextPosition.None) {
           return UnitConverter.Convert(
-            font.GetHeight(/*dpi??*/), 
+            font.GetHeight(Dpi), 
             BarCodeUnit.Pixel, 
-            unit);
+            unit,
+            Dpi);
         }
         return 0;
       }
@@ -161,9 +163,10 @@ namespace NBarCodes {
       get {
         if (textPosition != TextPosition.None) {
           return UnitConverter.Convert(
-            font.SizeInPoints/.75f, // DPI??
-            BarCodeUnit.Pixel,
-            unit);
+            font.SizeInPoints / 72f, // a point is 1/72 inch
+            BarCodeUnit.Inch,
+            unit,
+            Dpi);
         }
         return 0;
       }
@@ -176,7 +179,15 @@ namespace NBarCodes {
       set { unit = value; }
     }
 
+    [Description("The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties."),
+      Category("Behavior"), NotifyParentProperty(true)]
+    public int Dpi {
+      get { return dpi; }
+      set { dpi = value; }
+    }
+
     public virtual void Build(IBarCodeBuilder builder, string data) {
+      builder.Dpi = Dpi;
       builder.Unit = Unit;
       Draw(builder, data);
     }

@@ -69,15 +69,13 @@ namespace NBarCodes.Forms {
       }
     } string _data = "12345";
 
-    // TODO: check units!! Remove Units and only allow DPI??
     /// <summary>
     /// The unit to use when rendering the barcode. Affects all sizing properties.
     /// </summary>
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
       Category("Appearance"), 
       RefreshProperties(RefreshProperties.All),
-      DefaultValue(BarCodeUnit.Pixel),
-      Browsable(false)] 
+      DefaultValue(BarCodeUnit.Pixel)] 
     public BarCodeUnit Unit {
       get { return _unit; }
       set { 
@@ -89,6 +87,24 @@ namespace NBarCodes.Forms {
         }
       }
     } BarCodeUnit _unit = BarCodeUnit.Pixel;
+
+    /// <summary>
+    /// The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties.
+    /// </summary>
+    [Description("The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties."),
+      Category("Appearance"),
+      RefreshProperties(RefreshProperties.All)]
+    public int Dpi {
+      get { return _dpi; }
+      set {
+        int oldDpi = _dpi;
+        _dpi = value;
+        if (oldDpi != _dpi) {
+          _generator.ConvertDpi(oldDpi, _dpi);
+          Refresh();
+        }
+      }
+    } int _dpi = UnitConverter.ScreenDpi;
 
     /// <summary>
     /// The back color of the barcode.

@@ -8,7 +8,13 @@ namespace NBarCodes {
   /// </summary>
   class NullBuilder : IBarCodeBuilder {
 
-    public BarCodeUnit Unit { 
+    public int Dpi {
+      get { return 96; }
+      set { }
+    }
+    
+    public BarCodeUnit Unit
+    { 
       get { return BarCodeUnit.Pixel; }
       set {}
     }

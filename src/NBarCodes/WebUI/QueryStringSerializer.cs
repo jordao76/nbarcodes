@@ -19,6 +19,8 @@ namespace NBarCodes.WebUI {
     public const string DATA_KEY = "Data";
     /// <summary>Unit key.</summary>
     public const string UNIT_KEY = "Unit";
+    /// <summary>DPI key.</summary>
+    public const string DPI_KEY = "DPI";
     /// <summary>Back color key.</summary>
     public const string BACKCOLOR_KEY = "BackColor";
     /// <summary>Bar color key.</summary>
@@ -83,6 +85,9 @@ namespace NBarCodes.WebUI {
             break;
           case UNIT_KEY:
             bcs.Unit = (BarCodeUnit)Enum.Parse(typeof(BarCodeUnit), value);
+            break;
+          case DPI_KEY:
+            bcs.Dpi = int.Parse(value);
             break;
           case BACKCOLOR_KEY:
             bcs.BackColor = Color.FromArgb(int.Parse(value));
@@ -179,6 +184,8 @@ namespace NBarCodes.WebUI {
       queryBuilder.AppendFormat(QUERY_NODE, USECHECKSUM_KEY, UrlEncode(settings.UseChecksum));
       queryBuilder.Append(SEPARATOR);
       queryBuilder.AppendFormat(QUERY_NODE, UNIT_KEY, UrlEncode(settings.Unit));
+      queryBuilder.Append(SEPARATOR);
+      queryBuilder.AppendFormat(QUERY_NODE, DPI_KEY, UrlEncode(settings.Dpi));
 
       return queryBuilder.ToString();
     }

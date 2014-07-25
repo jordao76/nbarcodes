@@ -9,15 +9,16 @@ namespace NBarCodes.Tests {
   public static class SettingsUtils {
 
     /// <summary>
-    /// Returns barcode settings for testing.
+    /// Returns barcode settings for testing with non-default values.
     /// </summary>
     /// <returns>Settings for testing.</returns>
     public static BarCodeSettings CreateTestSettings() {
       BarCodeSettings settings = new BarCodeSettings();
 
-      settings.Type = BarCodeType.Code128;
-      settings.Data = "123456";
+      settings.Type = BarCodeType.Interleaved25;
+      settings.Data = "1234567";
       settings.Unit = BarCodeUnit.Centimeter;
+      settings.Dpi = 300;
       settings.BackColor = Color.BlanchedAlmond;
       settings.BarColor = Color.Honeydew;
       settings.BarHeight = 4.54f;
@@ -45,6 +46,7 @@ namespace NBarCodes.Tests {
       Assert.AreEqual(expected.Type, actual.Type);
       Assert.AreEqual(expected.Data, actual.Data);
       Assert.AreEqual(expected.Unit, actual.Unit);
+      Assert.AreEqual(expected.Dpi, actual.Dpi);
       Assert.AreEqual(expected.BackColor.ToArgb(), actual.BackColor.ToArgb());
       Assert.AreEqual(expected.BarColor.ToArgb(), actual.BarColor.ToArgb());
       Assert.AreEqual(expected.BarHeight, actual.BarHeight);

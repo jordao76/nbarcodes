@@ -12,7 +12,11 @@ namespace NBarCodes {
     private StringBuilder _htmlBuilder = new StringBuilder();
     private Size size;
 
-    // TODO: implement!
+    public int Dpi {
+      get { return 96; }
+      set { }
+    }
+
     public BarCodeUnit Unit { 
       get { return BarCodeUnit.Pixel; }
       set {}

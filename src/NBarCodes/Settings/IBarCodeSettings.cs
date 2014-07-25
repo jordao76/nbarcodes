@@ -31,11 +31,17 @@ namespace NBarCodes {
       get; set;
     }
 
-    // leave units on?? Put DPI on??
     /// <summary>
     /// The unit of measure of the barcode's measurable properties.
     /// </summary>
     BarCodeUnit Unit {
+      get; set;
+    }
+
+    /// <summary>
+    /// The DPI (dots per inch) of the barcode.
+    /// </summary>
+    int Dpi {
       get; set;
     }
 

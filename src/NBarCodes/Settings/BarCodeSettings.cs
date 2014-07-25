@@ -38,6 +38,15 @@ namespace NBarCodes {
     } BarCodeUnit _unit = BarCodeUnit.Pixel;
 
     /// <summary>
+    /// The DPI (dots per inch) of the barcode.
+    /// </summary>
+    public int Dpi
+    {
+      get { return _dpi; }
+      set { _dpi = value; }
+    } int _dpi = UnitConverter.ScreenDpi;
+
+    /// <summary>
     /// The back color of the barcode.
     /// </summary>
     public Color BackColor { 

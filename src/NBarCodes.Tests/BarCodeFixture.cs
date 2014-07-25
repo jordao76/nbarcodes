@@ -13,6 +13,21 @@ namespace NBarCodes.Tests {
   [Category("Acceptance")]
   public class BarCodeFixture {
 
+    static int c = 1;
+    //[Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
+    public void BarCodeGenerationDebugging(BarCodeTestInput input) {
+      BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings {
+        Type = input.Type,
+        Data = input.Data,
+        Dpi = 300,
+        Font = new Font("verdana", 14, GraphicsUnit.Pixel)
+      });
+
+      using (var image = generator.GenerateImage()) {
+        image.Save(string.Format("c:\\temp\\barcodes\\{0}_{1}.png", input.Type, c++), System.Drawing.Imaging.ImageFormat.Png);
+      }
+    }
+
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
     public void BarCodeGenerationTest(BarCodeTestInput input) {
       Trace.WriteLine(string.Format("Testing: {0}, {1}", input.Type, input.Data));

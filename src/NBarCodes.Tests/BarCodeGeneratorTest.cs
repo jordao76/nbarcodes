@@ -56,6 +56,8 @@ namespace NBarCodes.Tests {
       BarCodeGenerator generator = new BarCodeGenerator(settings);
       using (var image = generator.GenerateImage()) {
         AssertImage(image);
+        Assert.AreEqual(settings.Dpi, image.HorizontalResolution);
+        Assert.AreEqual(settings.Dpi, image.VerticalResolution);
       }
     }
 
