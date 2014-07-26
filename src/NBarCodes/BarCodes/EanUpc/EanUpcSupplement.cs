@@ -8,15 +8,23 @@ namespace NBarCodes {
     protected readonly static BitArray LeftGuard = BitArrayHelper.ToBitArray("1011");
     protected readonly static BitArray SeparatorBar = BitArrayHelper.ToBitArray("01");
 
+    public override float QuietZone {
+      get {
+        return 0;
+      }
+    }
+
     public EanUpcSupplement(EanUpc baseBarCode) {
       ImportSettings(baseBarCode);
       BarHeight = baseBarCode.BarHeight + baseBarCode.GuardExtraHeight - baseBarCode.TextHeight;
 
       // text position on top
-      if (baseBarCode.TextPosition == TextPosition.Bottom)
+      if (baseBarCode.TextPosition == TextPosition.Bottom) {
         TextPosition = TextPosition.Top;
-      else
+      }
+      else {
         TextPosition = baseBarCode.TextPosition;
+      }
     }
 
     internal static EanUpcSupplement GetSupplementBarCode(EanUpc baseBarCode, string data) {

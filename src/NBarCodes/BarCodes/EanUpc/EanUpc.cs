@@ -7,9 +7,10 @@ namespace NBarCodes {
 
   [Serializable]
   abstract class EanUpc : ModuleBarCode {
-    private float guardExtraHeight = 10;
-    private const float supplementOffsetRatio = 5;
-    private float supplementOffset = 10;
+
+    private const float supplementOffsetRatio = 11;
+
+    private float guardExtraHeight = 10 / 96f;
 
     protected readonly static BitArray LeftGuard = BitArrayHelper.ToBitArray("101");
     protected readonly static BitArray CenterGuard = BitArrayHelper.ToBitArray("01010");
@@ -19,6 +20,12 @@ namespace NBarCodes {
     protected readonly static ISymbolEncoder LeftEvenEncoder = new EanLeftEvenEncoder();
     protected readonly static ISymbolEncoder RightEncoder = new EanRightEncoder();
     protected readonly static ISymbolEncoder ParityEncoder = new EanParityEncoder();
+
+    public override float QuietZone {
+      get {
+        return ModuleWidth * 11;
+      }
+    }
 
     public override void ImportSettings(BarCode barCode) {
       base.ImportSettings(barCode);
@@ -30,22 +37,12 @@ namespace NBarCodes {
 
     public EanUpc() {
       TextPosition = TextPosition.Bottom;
-      supplementOffset = base.ModuleWidth * supplementOffsetRatio;
     }
 
-    public override float ModuleWidth {
-      get { return base.ModuleWidth; }
-      set { 
-        base.ModuleWidth = value;
-        supplementOffset = base.ModuleWidth * supplementOffsetRatio;
-      }
-    }
-
-    [DefaultValue(10f), NotifyParentProperty(true)]
+    [DefaultValue(10 / 96f), NotifyParentProperty(true)]
     public float GuardExtraHeight {
       get {
-        if (TextPosition == TextPosition.None)
-          return 0;
+        if (TextPosition == TextPosition.None) return 0;
         return guardExtraHeight;
       }
       set { guardExtraHeight = value; }
@@ -54,15 +51,21 @@ namespace NBarCodes {
     [Browsable(false),
      DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public float SupplementOffset {
-      get { return supplementOffset; }
+      get {
+        return ModuleWidth * supplementOffsetRatio;
+      }
     }
 
     protected override float ExtraHeight {
       get {
         // guard height and text height overlap, so we get the bigger
         float height; 
-        if (TextPosition != TextPosition.None) height = TextHeight;
-        else height = 0;
+        if (TextPosition != TextPosition.None) {
+          height = TextHeight;
+        }
+        else {
+          height = 0;
+        }
 
         return GuardExtraHeight > height ? GuardExtraHeight : height;
       }

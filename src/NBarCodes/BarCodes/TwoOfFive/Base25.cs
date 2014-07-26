@@ -18,6 +18,13 @@ namespace NBarCodes {
 
     private bool useChecksum = true;
 
+    public override float QuietZone {
+      get {
+        // 10X but min 1/4 in
+        return Math.Max(NarrowWidth * 10, UnitConverter.Convert(1 / 4f, BarCodeUnit.Inch, Unit, Dpi));
+      }
+    }
+
     [DefaultValue(true), NotifyParentProperty(true)]
     public bool UseChecksum {
       get { return useChecksum; }

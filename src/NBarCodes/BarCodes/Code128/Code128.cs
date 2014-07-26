@@ -18,6 +18,13 @@ namespace NBarCodes {
       get { return ModuleWidth * 13; }
     }
 
+    public override float QuietZone {
+      get {
+        // 10X but min 1/4 in
+        return Math.Max(ModuleWidth * 10, UnitConverter.Convert(1 / 4f, BarCodeUnit.Inch, Unit, Dpi));
+      }
+    }
+
     protected override void Draw(IBarCodeBuilder builder, string data) {
       ValidateCharacters(data);
 

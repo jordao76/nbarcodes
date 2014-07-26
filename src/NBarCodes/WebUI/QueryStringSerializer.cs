@@ -41,8 +41,6 @@ namespace NBarCodes.WebUI {
     public const string OFFSETHEIGHT_KEY = "OffsetHeight";
     /// <summary>Offset width key.</summary>
     public const string OFFSETWIDTH_KEY = "OffsetWidth";
-    /// <summary>Quiet zone key.</summary>
-    public const string QUIETZONE_KEY = "QuietZone";
     /// <summary>Font key.</summary>
     public const string FONT_KEY = "Font";
     /// <summary>Text position key.</summary>
@@ -119,9 +117,6 @@ namespace NBarCodes.WebUI {
           case OFFSETWIDTH_KEY:
             bcs.OffsetWidth = float.Parse(value);
             break;
-          case QUIETZONE_KEY:
-            bcs.QuietZone = float.Parse(value);
-            break;
           case FONT_KEY:
             bcs.Font = (Font)new FontConverter().ConvertFrom(value);
             break;
@@ -174,8 +169,6 @@ namespace NBarCodes.WebUI {
       queryBuilder.AppendFormat(QUERY_NODE, OFFSETHEIGHT_KEY, UrlEncode(settings.OffsetHeight));
       queryBuilder.Append(SEPARATOR);
       queryBuilder.AppendFormat(QUERY_NODE, OFFSETWIDTH_KEY, UrlEncode(settings.OffsetWidth));
-      queryBuilder.Append(SEPARATOR);
-      queryBuilder.AppendFormat(QUERY_NODE, QUIETZONE_KEY, UrlEncode(settings.QuietZone));
       queryBuilder.Append(SEPARATOR);
       queryBuilder.AppendFormat(QUERY_NODE, FONT_KEY, UrlEncode((string)new FontConverter().ConvertTo(settings.Font, typeof(string))));
       queryBuilder.Append(SEPARATOR);

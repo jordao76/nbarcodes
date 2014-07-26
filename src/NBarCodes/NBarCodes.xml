@@ -494,12 +494,6 @@
             Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
             </summary>
         </member>
-        <member name="P:NBarCodes.IBarCodeSettings.QuietZone">
-            <summary>
-            The width of the horizontal (left and right) quiet zone of the barcode.
-            Affected by <see cref="P:NBarCodes.IBarCodeSettings.Unit"/>.
-            </summary>
-        </member>
         <member name="P:NBarCodes.IBarCodeSettings.Font">
             <summary>
             The font used to render the text inside the barcode.
@@ -1187,9 +1181,6 @@
         </member>
         <member name="F:NBarCodes.WebUI.QueryStringSerializer.OFFSETWIDTH_KEY">
             <summary>Offset width key.</summary>
-        </member>
-        <member name="F:NBarCodes.WebUI.QueryStringSerializer.QUIETZONE_KEY">
-            <summary>Quiet zone key.</summary>
         </member>
         <member name="F:NBarCodes.WebUI.QueryStringSerializer.FONT_KEY">
             <summary>Font key.</summary>

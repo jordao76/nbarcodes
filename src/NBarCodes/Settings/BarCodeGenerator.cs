@@ -87,7 +87,6 @@ namespace NBarCodes {
       barCode.OffsetWidth = _settings.OffsetWidth;
       barCode.OffsetHeight = _settings.OffsetHeight;
       barCode.TextPosition = _settings.TextPosition;
-      barCode.QuietZone = _settings.QuietZone;
       barCode.BarColor = _settings.BarColor;
       barCode.BackColor = _settings.BackColor;
       barCode.FontColor = _settings.FontColor;
@@ -128,7 +127,6 @@ namespace NBarCodes {
       settingsToCopyTo.WideWidth = settingsToCopyFrom.WideWidth;
       settingsToCopyTo.OffsetHeight = settingsToCopyFrom.OffsetHeight;
       settingsToCopyTo.OffsetWidth = settingsToCopyFrom.OffsetWidth;
-      settingsToCopyTo.QuietZone = settingsToCopyFrom.QuietZone;
       settingsToCopyTo.Font = settingsToCopyFrom.Font;
       settingsToCopyTo.TextPosition = settingsToCopyFrom.TextPosition;
       settingsToCopyTo.UseChecksum = settingsToCopyFrom.UseChecksum;
@@ -149,7 +147,6 @@ namespace NBarCodes {
       _settings.WideWidth = UnitConverter.Convert(_settings.WideWidth, fromUnit, toUnit, dpi);
       _settings.OffsetHeight = UnitConverter.Convert(_settings.OffsetHeight, fromUnit, toUnit, dpi);
       _settings.OffsetWidth = UnitConverter.Convert(_settings.OffsetWidth, fromUnit, toUnit, dpi);
-      _settings.QuietZone = UnitConverter.Convert(_settings.QuietZone, fromUnit, toUnit, dpi);
     }
 
     /// <summary>
@@ -166,7 +163,6 @@ namespace NBarCodes {
       _settings.WideWidth = UnitConverter.ConvertDpi(_settings.WideWidth, unit, fromDpi, toDpi);
       _settings.OffsetHeight = UnitConverter.ConvertDpi(_settings.OffsetHeight, unit, fromDpi, toDpi);
       _settings.OffsetWidth = UnitConverter.ConvertDpi(_settings.OffsetWidth, unit, fromDpi, toDpi);
-      _settings.QuietZone = UnitConverter.ConvertDpi(_settings.QuietZone, unit, fromDpi, toDpi);
     }
 
     IBarCodeSettings _settings;

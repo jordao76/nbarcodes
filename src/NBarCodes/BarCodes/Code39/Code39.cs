@@ -25,6 +25,13 @@ namespace NBarCodes {
       get { return SymbolWidth * 2; }
     }
 
+    public override float QuietZone {
+      get {
+        // 10X but min 1/4 in
+        return Math.Max(NarrowWidth * 10, UnitConverter.Convert(1 / 4f, BarCodeUnit.Inch, Unit, Dpi));
+      }
+    }
+
     protected override void Draw(IBarCodeBuilder builder, string data) {
       ValidateCharacters(data);
 
@@ -82,12 +89,11 @@ namespace NBarCodes {
     /// </summary>
     /// <param name="symbols">Symbols to be encoded.</param>
     /// <returns>Extra width rendered.</returns>
-    private int CalculateExtraWidth(params BitArray[] symbols) {
-      int extraSpace = 0;
+    private float CalculateExtraWidth(params BitArray[] symbols) {
+      float extraSpace = 0;
       foreach (BitArray symbol in symbols) {
-        extraSpace += symbol.Length / 2;
+        extraSpace += NarrowWidth * (symbol.Length / 2);
       }
-
       return extraSpace;
     }
 
@@ -104,7 +110,7 @@ namespace NBarCodes {
         }
         else {
           // spaces must be wider
-          width += 1;
+          width += NarrowWidth;
         }
         
         x += width; // skip element (bar or space)

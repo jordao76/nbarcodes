@@ -10,6 +10,13 @@ namespace NBarCodes {
     private readonly static BitArray Frame = BitArrayHelper.ToBitArray("1");
     private readonly static ISymbolEncoder Encoder = new PostNetEncoder();
 
+    public override float QuietZone {
+      get {
+        // 1/8 in
+        return UnitConverter.Convert(1 / 8f, BarCodeUnit.Inch, Unit, Dpi);
+      }
+    }
+
     public override IChecksum Checksum {
       get { 
         if (base.Checksum == null) {

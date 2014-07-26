@@ -68,11 +68,11 @@ namespace NBarCodes.WebUI {
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
     Category("Appearance"), 
     RefreshProperties(RefreshProperties.All),
-    DefaultValue(BarCodeUnit.Pixel)] 
+    DefaultValue(BarCodeUnit.Inch)] 
     public BarCodeUnit Unit {
       get { 
         object o = ViewState["Unit"];
-        return o == null ? BarCodeUnit.Pixel : (BarCodeUnit)o;
+        return o == null ? BarCodeUnit.Inch : (BarCodeUnit)o;
       }
       set { 
         BarCodeUnit oldUnit = Unit;
@@ -260,12 +260,12 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The font of the barcode text.
     /// </summary>
-    [DefaultValue(typeof(Font), "Verdana, 8pt"), Description("The font of the barcode text."), Category("Appearance")]
+    [DefaultValue(typeof(Font), "Verdana, 15pt"), Description("The font of the barcode text."), Category("Appearance")]
     public Font Font {
       get { 
         object o = ViewState["Font"];
         if (o == null) {
-          return new Font("verdana", 8);
+          return new Font("verdana", 15);
         }
         return (Font)o;
       }

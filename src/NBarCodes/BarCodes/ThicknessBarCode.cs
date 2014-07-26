@@ -6,8 +6,8 @@ namespace NBarCodes {
 
   [Serializable]
   abstract class ThicknessBarCode : BarCode {
-    private float wideWidth = 3;
-    private float narrowWidth = 1;
+    private float wideWidth = .06f;
+    private float narrowWidth = .02f;
 
     public override void ImportSettings(BarCode barCode) {
       base.ImportSettings(barCode);
@@ -17,12 +17,12 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(3f), NotifyParentProperty(true)]
+    [DefaultValue(.06f), NotifyParentProperty(true)]
     public float WideWidth {
       get { return wideWidth; }
       set { wideWidth = value; }
     }
-    [DefaultValue(1f), NotifyParentProperty(true)]
+    [DefaultValue(.02f), NotifyParentProperty(true)]
     public float NarrowWidth {
       get { return narrowWidth; }
       set { narrowWidth = value; }

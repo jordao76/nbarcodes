@@ -9,11 +9,6 @@ namespace NBarCodes {
   /// </summary>
   class ImageBuilder : IBarCodeBuilder {
 
-    private const int MAX_WIDTH = 1000;
-    private const int MAX_HEIGHT = 700;
-    private const int MIN_WIDTH = 50;
-    private const int MIN_HEIGHT = 35;
-
     private Bitmap _barCodeImage;
     private StringFormat _drawFormat;
     private BarCodeUnit _unit;
@@ -25,7 +20,7 @@ namespace NBarCodes {
     public ImageBuilder() {
       _drawFormat = new StringFormat();
       _drawFormat.Alignment = StringAlignment.Center;
-      _unit = BarCodeUnit.Pixel;
+      _unit = BarCodeUnit.Inch;
       _dpi = UnitConverter.ScreenDpi;
     }
 
@@ -61,19 +56,6 @@ namespace NBarCodes {
       // have to convert width and height to pixels
       int widthInPixels = (int)ConvertToPixels(width);
       int heightInPixels = (int)ConvertToPixels(height);
-
-      if (widthInPixels > MAX_WIDTH) {
-        widthInPixels = MAX_WIDTH;
-      }
-      if (widthInPixels < MIN_WIDTH) {
-        widthInPixels = MIN_WIDTH;
-      }
-      if (heightInPixels > MAX_HEIGHT) {
-        heightInPixels = MAX_HEIGHT;
-      }
-      if (heightInPixels < MIN_HEIGHT) {
-        heightInPixels = MIN_HEIGHT;
-      }
 
       _barCodeImage = new Bitmap(widthInPixels, heightInPixels);
       _barCodeImage.SetResolution(_dpi, _dpi);

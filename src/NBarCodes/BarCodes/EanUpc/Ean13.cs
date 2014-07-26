@@ -7,6 +7,12 @@ namespace NBarCodes {
   [Serializable]
   class Ean13 : EanUpc {
 
+    public override float QuietZone {
+      get {
+        return ModuleWidth * 11;
+      }
+    }
+
     public override float TotalWidth { 
       get { return 95 * ModuleWidth + OffsetWidth * 2 + TextWidth + QuietZone * 2; }
     }
@@ -58,7 +64,9 @@ namespace NBarCodes {
       DrawText(builder, textX, y - TextHeight, text);
 
       // draw the supplement barcode, if one is present
-      if (supp != null) supp.Draw(builder, supplement, x + SupplementOffset, y - OffsetHeight);
+      if (supp != null) {
+        supp.Draw(builder, supplement, x + SupplementOffset, y - OffsetHeight);
+      }
     }
 
   }

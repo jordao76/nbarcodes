@@ -15,7 +15,7 @@ namespace NBarCodes {
     
     public BarCodeUnit Unit
     { 
-      get { return BarCodeUnit.Pixel; }
+      get { return BarCodeUnit.Inch; }
       set {}
     }
 

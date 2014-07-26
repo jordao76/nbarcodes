@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using NBarCodes.Tests.Readers;
 using NUnit.Framework;
+using System.Text.RegularExpressions;
 
 namespace NBarCodes.Tests {
 
@@ -13,19 +14,26 @@ namespace NBarCodes.Tests {
   [Category("Acceptance")]
   public class BarCodeFixture {
 
-    static int c = 1;
-    //[Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
-    public void BarCodeGenerationDebugging(BarCodeTestInput input) {
+    [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
+    public void BarCodeGenerationRaw(BarCodeTestInput input) {
+      int dpi = 120;
       BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings {
         Type = input.Type,
         Data = input.Data,
-        Dpi = 300,
-        Font = new Font("verdana", 14, GraphicsUnit.Pixel)
+        Dpi = dpi
       });
-
+      var dirName = Path.Combine(Path.GetTempPath(), "barcodes");
+      Directory.CreateDirectory(dirName);
       using (var image = generator.GenerateImage()) {
-        image.Save(string.Format("c:\\temp\\barcodes\\{0}_{1}.png", input.Type, c++), System.Drawing.Imaging.ImageFormat.Png);
+        var filePath = string.Format("{0}\\{1}_{2}_{3}.png", dirName, input.Type, dpi, MakeValidFileName(input.Data));
+        Trace.WriteLine(string.Format("Saving barcode image: {0}", filePath));
+        image.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
       }
+    }
+    private static string MakeValidFileName(string name) {
+      string invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
+      string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+      return Regex.Replace(name, invalidRegStr, "_");
     }
 
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]

@@ -30,7 +30,7 @@ namespace NBarCodes.Tests {
       settings.OffsetHeight = 1.234f;
       settings.OffsetWidth = 0.489f;
       settings.QuietZone = 0.001f;
-      settings.Font = new Font("verdana", 8f, FontStyle.Italic);
+      settings.Font = new Font("verdana", 15f, FontStyle.Italic);
       settings.TextPosition = TextPosition.All;
       settings.UseChecksum = true;
 
@@ -57,7 +57,6 @@ namespace NBarCodes.Tests {
       Assert.AreEqual(expected.WideWidth, actual.WideWidth);
       Assert.AreEqual(expected.OffsetHeight, actual.OffsetHeight);
       Assert.AreEqual(expected.OffsetWidth, actual.OffsetWidth);
-      Assert.AreEqual(expected.QuietZone, actual.QuietZone);
       Assert.AreEqual(expected.Font, actual.Font);
       Assert.AreEqual(expected.TextPosition, actual.TextPosition);
       Assert.AreEqual(expected.UseChecksum, actual.UseChecksum);

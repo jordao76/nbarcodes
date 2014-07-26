@@ -9,11 +9,19 @@ namespace NBarCodes.Tests.Readers {
   
     public BarCodeReaderResult ReadBarCode(Bitmap image) {
       var reader = new BarcodeReader();
-      var result = reader.Decode(image); 
+      var result = reader.Decode(image);
       return new BarCodeReaderResult { 
-        Data = result.Text, 
+        Data = ResolveText(result), 
         Type = ConvertType(result.BarcodeFormat) 
       };
+    }
+
+    private string ResolveText(Result result) {
+      string text = result.Text;
+      if (result.ResultMetadata.ContainsKey(ResultMetadataType.UPC_EAN_EXTENSION)) {
+        text += result.ResultMetadata[ResultMetadataType.UPC_EAN_EXTENSION];
+      }
+      return text;
     }
 
     private BarCodeType ConvertType(BarcodeFormat type) {

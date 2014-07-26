@@ -122,14 +122,6 @@ namespace NBarCodes {
     }
 
     /// <summary>
-    /// The width of the horizontal (left and right) quiet zone of the barcode.
-    /// Affected by <see cref="Unit"/>.
-    /// </summary>
-    float QuietZone {
-      get; set;
-    }
-
-    /// <summary>
     /// The font used to render the text inside the barcode.
     /// </summary>
     Font Font {

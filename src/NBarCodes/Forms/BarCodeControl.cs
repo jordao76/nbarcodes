@@ -26,12 +26,12 @@ namespace NBarCodes.Forms {
     public BarCodeControl() {
       //LicenseManager.Validate(typeof(BarCodeControl));
 
-      _errorFont = new Font("Verdana", 9F, FontStyle.Bold);
+      _errorFont = new Font("verdana", 16f, FontStyle.Bold);
       _errorBrush = Brushes.Red;
       _generator = new BarCodeGenerator(this);
 
       BackColor = Color.White;
-      Font = new Font("verdana", 8);
+      Font = new Font("verdana", 15);
     }
 
     #region Properties
@@ -75,7 +75,7 @@ namespace NBarCodes.Forms {
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
       Category("Appearance"), 
       RefreshProperties(RefreshProperties.All),
-      DefaultValue(BarCodeUnit.Pixel)] 
+      DefaultValue(BarCodeUnit.Inch)] 
     public BarCodeUnit Unit {
       get { return _unit; }
       set { 
@@ -86,7 +86,7 @@ namespace NBarCodes.Forms {
           Refresh();
         }
       }
-    } BarCodeUnit _unit = BarCodeUnit.Pixel;
+    } BarCodeUnit _unit = BarCodeUnit.Inch;
 
     /// <summary>
     /// The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties.
@@ -238,7 +238,7 @@ namespace NBarCodes.Forms {
     /// <summary>
     /// The font of the barcode text.
     /// </summary>
-    [DefaultValue(typeof(Font), "Verdana, 8pt"), Description("The font of the barcode text."), Category("Appearance")]
+    [DefaultValue(typeof(Font), "Verdana, 15pt"), Description("The font of the barcode text."), Category("Appearance")]
     public override Font Font {
       get { return base.Font; } 
       set { 

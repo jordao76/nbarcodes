@@ -73,7 +73,6 @@ namespace NBarCodes.Tests {
       querystring.Add(QueryStringSerializer.WIDEWIDTH_KEY, inputSettings.WideWidth.ToString());
       querystring.Add(QueryStringSerializer.OFFSETHEIGHT_KEY, inputSettings.OffsetHeight.ToString());
       querystring.Add(QueryStringSerializer.OFFSETWIDTH_KEY, inputSettings.OffsetWidth.ToString());
-      querystring.Add(QueryStringSerializer.QUIETZONE_KEY, inputSettings.QuietZone.ToString());
       querystring.Add(QueryStringSerializer.FONT_KEY, (string)new FontConverter().ConvertTo(inputSettings.Font, typeof(string)));
       querystring.Add(QueryStringSerializer.TEXTPOSITION_KEY, inputSettings.TextPosition.ToString());
       querystring.Add(QueryStringSerializer.USECHECKSUM_KEY, inputSettings.UseChecksum.ToString());
@@ -125,7 +124,6 @@ namespace NBarCodes.Tests {
       StringAssert.Contains(MakePair(QueryStringSerializer.WIDEWIDTH_KEY, settings.WideWidth), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.OFFSETHEIGHT_KEY, settings.OffsetHeight), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.OFFSETWIDTH_KEY, settings.OffsetWidth), queryString);
-      StringAssert.Contains(MakePair(QueryStringSerializer.QUIETZONE_KEY, settings.QuietZone), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.FONT_KEY, (string)new FontConverter().ConvertTo(settings.Font, typeof(string))), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.TEXTPOSITION_KEY, settings.TextPosition), queryString);
       StringAssert.Contains(MakePair(QueryStringSerializer.USECHECKSUM_KEY, settings.UseChecksum), queryString);

@@ -64,7 +64,9 @@ namespace NBarCodes {
       DrawText(builder, textX, y - TextHeight, text);
 
       // draw the supplement barcode, if one is present
-      if (supp != null) supp.Draw(builder, supplement, x + SupplementOffset, y - OffsetHeight);
+      if (supp != null) {
+        supp.Draw(builder, supplement, x + SupplementOffset, y - OffsetHeight);
+      }
     }
 
   }

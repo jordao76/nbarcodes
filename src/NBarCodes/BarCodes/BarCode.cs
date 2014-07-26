@@ -15,17 +15,16 @@ namespace NBarCodes {
   [TypeConverter(typeof(ExpandableObjectConverter))]
   [Serializable]
   abstract class BarCode {
-    private float barHeight = 50f;
-    private float offsetWidth = 5f;
-    private float offsetHeight = 5f;
+    private float barHeight = 50f / 96f;
+    private float offsetWidth = 5f / 96f;
+    private float offsetHeight = 5f / 96f;
     private TextPosition textPosition = TextPosition.None;
     [NonSerialized] private IChecksum checksum = null;
-    private float quietZone = 0f;
     private Color barColor = Color.Black;
     private Color backColor = Color.White;
     private Color fontColor = Color.Black;
-    private Font font = new Font("verdana", 8);
-    private BarCodeUnit unit = BarCodeUnit.Pixel;
+    private Font font = new Font("verdana", 15);
+    private BarCodeUnit unit = BarCodeUnit.Inch;
     private int dpi = UnitConverter.ScreenDpi;
 
     public virtual void ImportSettings(BarCode barCode) {
@@ -33,7 +32,6 @@ namespace NBarCodes {
       offsetWidth = barCode.offsetWidth;
       offsetHeight = barCode.offsetHeight;
       textPosition = barCode.textPosition;
-      quietZone = barCode.quietZone;
       barColor = barCode.barColor;
       backColor = barCode.backColor;
       fontColor = barCode.fontColor;
@@ -44,7 +42,7 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(50f), NotifyParentProperty(true)]
+    [DefaultValue(50f / 96f), NotifyParentProperty(true)]
     public float BarHeight {
       get { return barHeight; }
       set { barHeight = value; }
@@ -58,7 +56,7 @@ namespace NBarCodes {
     /// The side of the barcode (left or right) for which the margin offset width affects depends on the particular
     /// barcode implementation.
     /// </remarks>
-    [DefaultValue(5f), NotifyParentProperty(true)]
+    [DefaultValue(5f / 96f), NotifyParentProperty(true)]
     public float OffsetWidth {
       get { return offsetWidth; }
       set { offsetWidth = value; }
@@ -72,7 +70,7 @@ namespace NBarCodes {
     /// The side of the barcode (top or bottom) for which the margin offset height affects depends on the particular
     /// barcode implementation.
     /// </remarks>
-    [DefaultValue(5f), NotifyParentProperty(true)]
+    [DefaultValue(5f / 96f), NotifyParentProperty(true)]
     public float OffsetHeight {
       get { return offsetHeight; }
       set { offsetHeight = value; }
@@ -110,11 +108,7 @@ namespace NBarCodes {
       set { checksum = value; }
     }
 
-    [DefaultValue(0f), NotifyParentProperty(true)]
-    public float QuietZone {
-      get { return quietZone; }
-      set { quietZone = value; }
-    }
+    public abstract float QuietZone { get; }
 
     [DefaultValue(typeof(Color), "White"), NotifyParentProperty(true)]
     public Color BackColor {
@@ -140,7 +134,7 @@ namespace NBarCodes {
       set { barColor = fontColor = value; }
     }
 
-    [DefaultValue(typeof(Font), "Verdana, 8pt"), NotifyParentProperty(true)]
+    [DefaultValue(typeof(Font), "Verdana, 15pt"), NotifyParentProperty(true)]
     public Font Font {
       get { return font; }
       set { font = value; }
@@ -173,7 +167,7 @@ namespace NBarCodes {
     }
 
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
-      Category("Behavior"), NotifyParentProperty(true), DefaultValue(BarCodeUnit.Pixel)]
+      Category("Behavior"), NotifyParentProperty(true), DefaultValue(BarCodeUnit.Inch)]
     public BarCodeUnit Unit {
       get { return unit; }
       set { unit = value; }
