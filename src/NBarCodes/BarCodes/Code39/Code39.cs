@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.ComponentModel;
 
 namespace NBarCodes {
 
@@ -10,7 +9,6 @@ namespace NBarCodes {
 
     private bool useChecksum = false;
 
-    [DefaultValue(false), NotifyParentProperty(true)]
     public bool UseChecksum {
       get { return useChecksum; }
       set { useChecksum = value; }

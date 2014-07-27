@@ -29,7 +29,6 @@ namespace NBarCodes.Tests {
       settings.WideWidth = .634f;
       settings.OffsetHeight = 1.234f;
       settings.OffsetWidth = 0.489f;
-      settings.QuietZone = 0.001f;
       settings.Font = new Font("verdana", 15f, FontStyle.Italic);
       settings.TextPosition = TextPosition.All;
       settings.UseChecksum = true;

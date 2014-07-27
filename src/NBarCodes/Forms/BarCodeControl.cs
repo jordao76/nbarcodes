@@ -24,14 +24,12 @@ namespace NBarCodes.Forms {
     /// Creates a new instance of the <see cref="BarCodeControl"/>.
     /// </summary>
     public BarCodeControl() {
-      //LicenseManager.Validate(typeof(BarCodeControl));
-
       _errorFont = new Font("verdana", 16f, FontStyle.Bold);
       _errorBrush = Brushes.Red;
       _generator = new BarCodeGenerator(this);
 
-      BackColor = Color.White;
-      Font = new Font("verdana", 15);
+      BackColor = Defaults.BackColor;
+      Font = Defaults.Font;
     }
 
     #region Properties
@@ -75,7 +73,7 @@ namespace NBarCodes.Forms {
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
       Category("Appearance"), 
       RefreshProperties(RefreshProperties.All),
-      DefaultValue(BarCodeUnit.Inch)] 
+      DefaultValue(Defaults.Unit)] 
     public BarCodeUnit Unit {
       get { return _unit; }
       set { 
@@ -86,7 +84,7 @@ namespace NBarCodes.Forms {
           Refresh();
         }
       }
-    } BarCodeUnit _unit = BarCodeUnit.Inch;
+    } BarCodeUnit _unit = Defaults.Unit;
 
     /// <summary>
     /// The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties.
@@ -104,12 +102,12 @@ namespace NBarCodes.Forms {
           Refresh();
         }
       }
-    } int _dpi = UnitConverter.ScreenDpi;
+    } int _dpi = Defaults.Dpi;
 
     /// <summary>
     /// The back color of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "White"), Description("The back color of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.BackColorName), Description("The back color of the barcode.")]
     public override Color BackColor { 
       get { return base.BackColor; } 
       set { base.BackColor = value; }
@@ -118,127 +116,115 @@ namespace NBarCodes.Forms {
     /// <summary>
     /// The color of the bar of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "Black"), Description("The color of the bar of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.BarColorName), Description("The color of the bar of the barcode.")]
     public Color BarColor {
       get { return _barColor; } 
       set { 
         _barColor = value; 
         Refresh();
       }
-    } Color _barColor = Color.Black;
+    } Color _barColor = Defaults.BarColor;
 
     /// <summary>
     /// The height of the bar.
     /// </summary>
-    [Description("The height of the bar."), Category("Appearance"), Bindable(true), DefaultValue(50f)]
+    [Description("The height of the bar."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.BarHeight)]
     public float BarHeight {
       get { return _barHeight; } 
       set { 
         _barHeight = value; 
         Refresh();
       }
-    } float _barHeight = 50f;
+    } float _barHeight = Defaults.BarHeight;
 
     /// <summary>
     /// The font color of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "Black"), Description("The font color of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.FontColorName), Description("The font color of the barcode.")]
     public Color FontColor { 
       get { return _fontColor; } 
       set { 
         _fontColor = value; 
         Refresh();
       }
-    } Color _fontColor = Color.Black;
+    } Color _fontColor = Defaults.FontColor;
 
     /// <summary>
     /// The extra height of the guard on EAN or UPC barcodes.
     /// </summary>
-    [Description("The extra height of the guard on EAN or UPC barcodes."), Category("Appearance"), Bindable(true), DefaultValue(10f)]
+    [Description("The extra height of the guard on EAN or UPC barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.GuardExtraHeight)]
     public float GuardExtraHeight {
       get { return _guardExtraHeight; } 
       set { 
         _guardExtraHeight = value; 
         Refresh();
       }
-    } float _guardExtraHeight = 10f;
+    } float _guardExtraHeight = Defaults.GuardExtraHeight;
 
     /// <summary>
     /// The width of a bar in module-based barcodes.
     /// </summary>
-    [Description("The width of a bar in module-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(1f)]
+    [Description("The width of a bar in module-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.ModuleWidth)]
     public float ModuleWidth {
       get { return _moduleWidth; } 
       set { 
         _moduleWidth = value; 
         Refresh();
       }
-    } float _moduleWidth = 1f;
+    } float _moduleWidth = Defaults.ModuleWidth;
 
     /// <summary>
     /// The width of a narrow bar in thickness-based barcodes.
     /// </summary>
-    [Description("The width of a narrow bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(1f)]
+    [Description("The width of a narrow bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.NarrowWidth)]
     public float NarrowWidth {
       get { return _narrowWidth; } 
       set { 
         _narrowWidth = value; 
         Refresh();
       }
-    } float _narrowWidth = 1f;
+    } float _narrowWidth = Defaults.NarrowWidth;
 
     /// <summary>
     /// The width of a wide bar in thickness-based barcodes.
     /// </summary>
-    [Description("The width of a wide bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(3f)]
+    [Description("The width of a wide bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.WideWidth)]
     public float WideWidth {
       get { return _wideWidth; } 
       set { 
         _wideWidth = value; 
         Refresh();
       }
-    } float _wideWidth = 3f;
+    } float _wideWidth = Defaults.WideWidth;
 
     /// <summary>
     /// The height offset of the barcode.
     /// </summary>
-    [Description("The height offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(5f)]
+    [Description("The height offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.OffsetHeight)]
     public float OffsetHeight {
       get { return _offsetHeight; } 
       set { 
         _offsetHeight = value; 
         Refresh();
       }
-    } float _offsetHeight = 5f;
+    } float _offsetHeight = Defaults.OffsetHeight;
 
     /// <summary>
     /// The width offset of the barcode.
     /// </summary>
-    [Description("The width offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(5f)]
+    [Description("The width offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.OffsetWidth)]
     public float OffsetWidth {
       get { return _offsetWidth; } 
       set { 
         _offsetWidth = value; 
         Refresh();
       }
-    } float _offsetWidth = 5f;
-
-    /// <summary>
-    /// The quiet zone for the barcode.
-    /// </summary>
-    [Description("The quiet zone for the barcode."), Category("Appearance"), Bindable(true), DefaultValue(0f)]
-    public float QuietZone {
-      get { return _quietZone; } 
-      set { 
-        _quietZone = value; 
-        Refresh();
-      }
-    } float _quietZone = 0f;
+    } float _offsetWidth = Defaults.OffsetWidth;
 
     /// <summary>
     /// The font of the barcode text.
     /// </summary>
-    [DefaultValue(typeof(Font), "Verdana, 15pt"), Description("The font of the barcode text."), Category("Appearance")]
+    [DefaultValue(typeof(Font), Defaults.FontName), Description("The font of the barcode text."), Category("Appearance")]
     public override Font Font {
       get { return base.Font; } 
       set { 
@@ -250,14 +236,14 @@ namespace NBarCodes.Forms {
     /// <summary>
     /// The position of the text.
     /// </summary>
-    [Description("The position of the text."), Category("Appearance"), Bindable(true), DefaultValue(TextPosition.Bottom)]
+    [Description("The position of the text."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.TextPos)]
     public TextPosition TextPosition {
       get { return _textPosition; } 
       set { 
         _textPosition = value; 
         Refresh();
       }
-    } TextPosition _textPosition = TextPosition.Bottom;
+    } TextPosition _textPosition = Defaults.TextPos;
 
     /// <summary>
     /// Whether to use a checksum on barcodes where it is optional.

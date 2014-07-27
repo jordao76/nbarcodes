@@ -597,11 +597,6 @@
             The width offset of the barcode.
             </summary>
         </member>
-        <member name="P:NBarCodes.Forms.BarCodeControl.QuietZone">
-            <summary>
-            The quiet zone for the barcode.
-            </summary>
-        </member>
         <member name="P:NBarCodes.Forms.BarCodeControl.Font">
             <summary>
             The font of the barcode text.
@@ -784,12 +779,6 @@
             Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
             </summary>
         </member>
-        <member name="P:NBarCodes.BarCodeSettings.QuietZone">
-            <summary>
-            The width of the horizontal (left and right) quiet zone of the barcode.
-            Affected by <see cref="P:NBarCodes.BarCodeSettings.Unit"/>.
-            </summary>
-        </member>
         <member name="P:NBarCodes.BarCodeSettings.Font">
             <summary>
             The font used to render the text inside the barcode.
@@ -947,7 +936,6 @@
         <member name="M:NBarCodes.UnitConverter.Convert(System.Single,NBarCodes.BarCodeUnit,NBarCodes.BarCodeUnit,System.Int32)">
             <summary>
             Converts a value between measuring units.
-            If the target unit is pixels, the converted value is rounded up to the nearest integer.
             </summary>
             <param name="value">Value to be converted.</param>
             <param name="sourceUnit">The unit to convert from.</param>
@@ -959,7 +947,6 @@
             <summary>
             Convert a value to another DPI.
             If the value is in a non-pixel unit, the same value is returned to maintain the aspect ratio. 
-            Pixel units are rounded up to the nearest integer.
             </summary>
             <param name="value">Value to convert.</param>
             <param name="unit">Value unit.</param>
@@ -1009,7 +996,6 @@
         <member name="M:NBarCodes.WebUI.BarCodeControl.#ctor">
             <summary>
             Creates a new instance of the <see cref="T:NBarCodes.WebUI.BarCodeControl"/> class.
-            Will validate the license of the control.
             </summary>
         </member>
         <member name="M:NBarCodes.WebUI.BarCodeControl.Render(System.Web.UI.HtmlTextWriter)">
@@ -1035,7 +1021,7 @@
         </member>
         <member name="P:NBarCodes.WebUI.BarCodeControl.Dpi">
             <summary>
-            The DPi (dots per inch) to use when rendering the barcode. Affects all sizing properties.
+            The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties.
             </summary>
         </member>
         <member name="P:NBarCodes.WebUI.BarCodeControl.BackColor">
@@ -1086,11 +1072,6 @@
         <member name="P:NBarCodes.WebUI.BarCodeControl.OffsetWidth">
             <summary>
             The width offset of the barcode.
-            </summary>
-        </member>
-        <member name="P:NBarCodes.WebUI.BarCodeControl.QuietZone">
-            <summary>
-            The quiet zone for the barcode.
             </summary>
         </member>
         <member name="P:NBarCodes.WebUI.BarCodeControl.Font">

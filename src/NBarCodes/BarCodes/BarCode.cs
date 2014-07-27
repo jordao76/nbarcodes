@@ -1,7 +1,6 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.ComponentModel;
 
 namespace NBarCodes {
 
@@ -12,20 +11,19 @@ namespace NBarCodes {
   /// This is the base class for creating barcodes, it defines common functionality like 
   /// bar measures, text position and colors.
   /// </remarks>
-  [TypeConverter(typeof(ExpandableObjectConverter))]
   [Serializable]
   abstract class BarCode {
-    private float barHeight = 50f / 96f;
-    private float offsetWidth = 5f / 96f;
-    private float offsetHeight = 5f / 96f;
-    private TextPosition textPosition = TextPosition.None;
+    private float barHeight = Defaults.BarHeight;
+    private float offsetWidth = Defaults.OffsetWidth;
+    private float offsetHeight = Defaults.OffsetHeight;
+    private TextPosition textPosition = Defaults.TextPos;
     [NonSerialized] private IChecksum checksum = null;
-    private Color barColor = Color.Black;
-    private Color backColor = Color.White;
-    private Color fontColor = Color.Black;
-    private Font font = new Font("verdana", 15);
-    private BarCodeUnit unit = BarCodeUnit.Inch;
-    private int dpi = UnitConverter.ScreenDpi;
+    private Color barColor = Defaults.BarColor;
+    private Color backColor = Defaults.BackColor;
+    private Color fontColor = Defaults.FontColor;
+    private Font font = Defaults.Font;
+    private BarCodeUnit unit = Defaults.Unit;
+    private int dpi = Defaults.Dpi;
 
     public virtual void ImportSettings(BarCode barCode) {
       barHeight = barCode.barHeight;
@@ -42,7 +40,6 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(50f / 96f), NotifyParentProperty(true)]
     public float BarHeight {
       get { return barHeight; }
       set { barHeight = value; }
@@ -56,7 +53,6 @@ namespace NBarCodes {
     /// The side of the barcode (left or right) for which the margin offset width affects depends on the particular
     /// barcode implementation.
     /// </remarks>
-    [DefaultValue(5f / 96f), NotifyParentProperty(true)]
     public float OffsetWidth {
       get { return offsetWidth; }
       set { offsetWidth = value; }
@@ -70,7 +66,6 @@ namespace NBarCodes {
     /// The side of the barcode (top or bottom) for which the margin offset height affects depends on the particular
     /// barcode implementation.
     /// </remarks>
-    [DefaultValue(5f / 96f), NotifyParentProperty(true)]
     public float OffsetHeight {
       get { return offsetHeight; }
       set { offsetHeight = value; }
@@ -96,13 +91,11 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(TextPosition.None), NotifyParentProperty(true)]
     public virtual TextPosition TextPosition {
       get { return textPosition; }
       set { textPosition = value; }
     }
 
-    [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public virtual IChecksum Checksum {
       get { return checksum; }
       set { checksum = value; }
@@ -110,31 +103,26 @@ namespace NBarCodes {
 
     public abstract float QuietZone { get; }
 
-    [DefaultValue(typeof(Color), "White"), NotifyParentProperty(true)]
     public Color BackColor {
       get { return backColor; }
       set { backColor = value; }
     }
     
-    [DefaultValue(typeof(Color), "Black"), NotifyParentProperty(true)]
     public Color BarColor {
       get { return barColor; }
       set { barColor = value; }
     }
     
-    [DefaultValue(typeof(Color), "Black"), NotifyParentProperty(true)]
     public Color FontColor {
       get { return fontColor; }
       set { fontColor = value; }
     }
 
-    [Browsable(false)]
     public Color ForeColor {
       get { return barColor; }
       set { barColor = fontColor = value; }
     }
 
-    [DefaultValue(typeof(Font), "Verdana, 15pt"), NotifyParentProperty(true)]
     public Font Font {
       get { return font; }
       set { font = value; }
@@ -166,15 +154,11 @@ namespace NBarCodes {
       }
     }
 
-    [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
-      Category("Behavior"), NotifyParentProperty(true), DefaultValue(BarCodeUnit.Inch)]
     public BarCodeUnit Unit {
       get { return unit; }
       set { unit = value; }
     }
 
-    [Description("The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties."),
-      Category("Behavior"), NotifyParentProperty(true)]
     public int Dpi {
       get { return dpi; }
       set { dpi = value; }

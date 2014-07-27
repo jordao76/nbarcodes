@@ -43,7 +43,6 @@ namespace NBarCodes {
 
     /// <summary>
     /// Converts a value between measuring units.
-    /// If the target unit is pixels, the converted value is rounded up to the nearest integer.
     /// </summary>
     /// <param name="value">Value to be converted.</param>
     /// <param name="sourceUnit">The unit to convert from.</param>
@@ -79,17 +78,12 @@ namespace NBarCodes {
 
       converted *= ConversionTable [sourceUnitIndex, targetUnitIndex];
 
-      if (targetUnit == BarCodeUnit.Pixel) {
-        converted = (float)Math.Ceiling(converted);
-      }
-
       return converted;
     }
 
     /// <summary>
     /// Convert a value to another DPI.
     /// If the value is in a non-pixel unit, the same value is returned to maintain the aspect ratio. 
-    /// Pixel units are rounded up to the nearest integer.
     /// </summary>
     /// <param name="value">Value to convert.</param>
     /// <param name="unit">Value unit.</param>
@@ -106,7 +100,7 @@ namespace NBarCodes {
       }
 
       var ratio = toDpi / (float)fromDpi;
-      return (float)Math.Ceiling(value * ratio);
+      return value * ratio;
     }
 
   }

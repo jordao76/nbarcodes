@@ -1,13 +1,12 @@
 using System;
-using System.Drawing;
 using System.Collections;
-using System.ComponentModel;
+using System.Drawing;
 
 namespace NBarCodes {
 
   [Serializable]
   abstract class ModuleBarCode : BarCode {
-    private float moduleWidth = .02f;
+    private float moduleWidth = Defaults.ModuleWidth;
 
     public override void ImportSettings(BarCode barCode) {
       base.ImportSettings(barCode);
@@ -17,7 +16,6 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(.02f), NotifyParentProperty(true)]
     public virtual float ModuleWidth {
       get { return moduleWidth; }
       set { moduleWidth = value; }

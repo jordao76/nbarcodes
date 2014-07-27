@@ -117,6 +117,7 @@
     <Compile Include="BarCodes\Code39\Code39Encoder.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BarCodes\Defaults.cs" />
     <Compile Include="BarCodes\EanUpc\Ean13.cs">
       <SubType>Code</SubType>
     </Compile>

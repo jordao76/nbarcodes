@@ -19,11 +19,8 @@ namespace NBarCodes.WebUI {
 
     /// <summary>
     /// Creates a new instance of the <see cref="BarCodeControl"/> class.
-    /// Will validate the license of the control.
     /// </summary>
     public BarCodeControl() {
-      //LicenseManager.Validate(typeof(BarCodeControl));
-
       _generator = new BarCodeGenerator(this);
     }
 
@@ -68,23 +65,23 @@ namespace NBarCodes.WebUI {
     [Description("The unit to use when rendering the barcode. Affects all sizing properties."), 
     Category("Appearance"), 
     RefreshProperties(RefreshProperties.All),
-    DefaultValue(BarCodeUnit.Inch)] 
+    DefaultValue(Defaults.Unit)] 
     public BarCodeUnit Unit {
       get { 
         object o = ViewState["Unit"];
-        return o == null ? BarCodeUnit.Inch : (BarCodeUnit)o;
+        return o == null ? Defaults.Unit : (BarCodeUnit)o;
       }
       set { 
         BarCodeUnit oldUnit = Unit;
-        ViewState["Unit"] = value; 
         if (oldUnit != value) {
+          ViewState["Unit"] = value;
           _generator.ConvertValues(oldUnit, value);
         }
       }
     }
 
     /// <summary>
-    /// The DPi (dots per inch) to use when rendering the barcode. Affects all sizing properties.
+    /// The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties.
     /// </summary>
     [Description("The DPI (dots per inch) to use when rendering the barcode. Affects all sizing properties."),
     Category("Appearance"),
@@ -92,12 +89,12 @@ namespace NBarCodes.WebUI {
     public int Dpi {
       get {
         object o = ViewState["DPI"];
-        return o == null ? UnitConverter.ScreenDpi : (int)o;
+        return o == null ? Defaults.Dpi : (int)o;
       }
       set {
         int oldDpi = Dpi;
-        ViewState["DPI"] = value;
         if (oldDpi != value) {
+          ViewState["DPI"] = value;
           _generator.ConvertDpi(oldDpi, value);
         }
       }
@@ -106,11 +103,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The back color of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "White"), Description("The back color of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.BackColorName), Description("The back color of the barcode.")]
     public Color BackColor { 
       get { 
         object o = ViewState["BackColor"];
-        return o == null ? Color.White : (Color)o;
+        return o == null ? Defaults.BackColor : (Color)o;
       }
       set { 
         ViewState["BackColor"] = value; 
@@ -120,11 +117,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The color of the bar of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "Black"), Description("The color of the bar of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.BarColorName), Description("The color of the bar of the barcode.")]
     public Color BarColor {
       get { 
         object o = ViewState["BarColor"];
-        return o == null ? Color.Black : (Color)o;
+        return o == null ? Defaults.BarColor : (Color)o;
       }
       set { 
         ViewState["BarColor"] = value; 
@@ -134,11 +131,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The height of the bar.
     /// </summary>
-    [Description("The height of the bar."), Category("Appearance"), Bindable(true), DefaultValue(50f)]
+    [Description("The height of the bar."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.BarHeight)]
     public float BarHeight {
       get { 
         object o = ViewState["BarHeight"];
-        return o == null ? 50f : (float)o;
+        return o == null ? Defaults.BarHeight : (float)o;
       }
       set {
         ViewState["BarHeight"] = value; 
@@ -148,11 +145,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The font color of the barcode.
     /// </summary>
-    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), "Black"), Description("The font color of the barcode.")]
+    [TypeConverter(typeof(ColorConverter)), Bindable(true), Category("Appearance"), DefaultValue(typeof(Color), Defaults.FontColorName), Description("The font color of the barcode.")]
     public Color FontColor { 
       get { 
         object o = ViewState["FontColor"];
-        return o == null ? Color.Black : (Color)o;
+        return o == null ? Defaults.FontColor : (Color)o;
       }
       set { 
         ViewState["FontColor"] = value; 
@@ -162,11 +159,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The extra height of the guard on EAN or UPC barcodes.
     /// </summary>
-    [Description("The extra height of the guard on EAN or UPC barcodes."), Category("Appearance"), Bindable(true), DefaultValue(10f)]
+    [Description("The extra height of the guard on EAN or UPC barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.GuardExtraHeight)]
     public float GuardExtraHeight {
       get { 
         object o = ViewState["GuardExtraHeight"];
-        return o == null ? 10f : (float)o;
+        return o == null ? Defaults.GuardExtraHeight : (float)o;
       }
       set {
         ViewState["GuardExtraHeight"] = value; 
@@ -176,11 +173,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The width of a bar in module-based barcodes.
     /// </summary>
-    [Description("The width of a bar in module-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(1f)]
+    [Description("The width of a bar in module-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.ModuleWidth)]
     public float ModuleWidth {
       get { 
         object o = ViewState["ModuleWidth"];
-        return o == null ? 1f : (float)o;
+        return o == null ? Defaults.ModuleWidth : (float)o;
       }
       set {
         ViewState["ModuleWidth"] = value; 
@@ -190,11 +187,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The width of a narrow bar in thickness-based barcodes.
     /// </summary>
-    [Description("The width of a narrow bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(1f)]
+    [Description("The width of a narrow bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.NarrowWidth)]
     public float NarrowWidth {
       get { 
         object o = ViewState["NarrowWidth"];
-        return o == null ? 1f : (float)o;
+        return o == null ? Defaults.NarrowWidth : (float)o;
       }
       set {
         ViewState["NarrowWidth"] = value; 
@@ -204,11 +201,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The width of a wide bar in thickness-based barcodes.
     /// </summary>
-    [Description("The width of a wide bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(3f)]
+    [Description("The width of a wide bar in thickness-based barcodes."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.WideWidth)]
     public float WideWidth {
       get { 
         object o = ViewState["WideWidth"];
-        return o == null ? 3f : (float)o;
+        return o == null ? Defaults.WideWidth : (float)o;
       }
       set {
         ViewState["WideWidth"] = value; 
@@ -218,11 +215,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The height offset of the barcode.
     /// </summary>
-    [Description("The height offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(5f)]
+    [Description("The height offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.OffsetHeight)]
     public float OffsetHeight {
       get { 
         object o = ViewState["OffsetHeight"];
-        return o == null ? 5f : (float)o;
+        return o == null ? Defaults.OffsetHeight : (float)o;
       }
       set {
         ViewState["OffsetHeight"] = value; 
@@ -232,11 +229,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The width offset of the barcode.
     /// </summary>
-    [Description("The width offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(5f)]
+    [Description("The width offset of the barcode."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.OffsetWidth)]
     public float OffsetWidth {
       get { 
         object o = ViewState["OffsetWidth"];
-        return o == null ? 5f : (float)o;
+        return o == null ? Defaults.OffsetWidth : (float)o;
       }
       set {
         ViewState["OffsetWidth"] = value; 
@@ -244,28 +241,14 @@ namespace NBarCodes.WebUI {
     }
 
     /// <summary>
-    /// The quiet zone for the barcode.
-    /// </summary>
-    [Description("The quiet zone for the barcode."), Category("Appearance"), Bindable(true), DefaultValue(0f)]
-    public float QuietZone {
-      get { 
-        object o = ViewState["QuietZone"];
-        return o == null ? 0f : (float)o;
-      }
-      set {
-        ViewState["QuietZone"] = value; 
-      }
-    }
-
-    /// <summary>
     /// The font of the barcode text.
     /// </summary>
-    [DefaultValue(typeof(Font), "Verdana, 15pt"), Description("The font of the barcode text."), Category("Appearance")]
+    [DefaultValue(typeof(Font), Defaults.FontName), Description("The font of the barcode text."), Category("Appearance")]
     public Font Font {
       get { 
         object o = ViewState["Font"];
         if (o == null) {
-          return new Font("verdana", 15);
+          return Defaults.Font;
         }
         return (Font)o;
       }
@@ -277,11 +260,11 @@ namespace NBarCodes.WebUI {
     /// <summary>
     /// The position of the text.
     /// </summary>
-    [Description("The position of the text."), Category("Appearance"), Bindable(true), DefaultValue(TextPosition.Bottom)]
+    [Description("The position of the text."), Category("Appearance"), Bindable(true), DefaultValue(Defaults.TextPos)]
     public TextPosition TextPosition {
       get { 
         object o = ViewState["TextPosition"];
-        return o == null ? TextPosition.Bottom : (TextPosition)o;
+        return o == null ? Defaults.TextPos : (TextPosition)o;
       }
       set {
         ViewState["TextPosition"] = value; 

@@ -115,9 +115,8 @@ namespace NBarCodes.Samples.WinForms
       // 
       this.barCodeControl1.BackColor = System.Drawing.Color.WhiteSmoke;
       this.barCodeControl1.BarColor = System.Drawing.Color.DimGray;
-      this.barCodeControl1.BarHeight = 75F;
       this.barCodeControl1.Data = "NBarCodes";
-      this.barCodeControl1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+      this.barCodeControl1.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold);
       this.barCodeControl1.FontColor = System.Drawing.Color.DarkOliveGreen;
       this.barCodeControl1.Location = new System.Drawing.Point(16, 91);
       this.barCodeControl1.Name = "barCodeControl1";

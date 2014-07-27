@@ -1,7 +1,6 @@
 using System;
-using System.Text.RegularExpressions;
 using System.Collections;
-using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace NBarCodes {
 
@@ -10,7 +9,7 @@ namespace NBarCodes {
 
     private const float supplementOffsetRatio = 11;
 
-    private float guardExtraHeight = 10 / 96f;
+    private float guardExtraHeight = Defaults.GuardExtraHeight;
 
     protected readonly static BitArray LeftGuard = BitArrayHelper.ToBitArray("101");
     protected readonly static BitArray CenterGuard = BitArrayHelper.ToBitArray("01010");
@@ -39,7 +38,6 @@ namespace NBarCodes {
       TextPosition = TextPosition.Bottom;
     }
 
-    [DefaultValue(10 / 96f), NotifyParentProperty(true)]
     public float GuardExtraHeight {
       get {
         if (TextPosition == TextPosition.None) return 0;
@@ -48,8 +46,6 @@ namespace NBarCodes {
       set { guardExtraHeight = value; }
     }
 
-    [Browsable(false),
-     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public float SupplementOffset {
       get {
         return ModuleWidth * supplementOffsetRatio;
@@ -71,7 +67,6 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(TextPosition.Bottom), NotifyParentProperty(true), RefreshProperties(RefreshProperties.Repaint)]
     public override TextPosition TextPosition {
       get { return base.TextPosition; }
       set { 
@@ -82,8 +77,6 @@ namespace NBarCodes {
       }
     }
 
-    [Browsable(false),
-     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public abstract float TotalWidth { get; }
 
     protected string Validate(string data, int fullLength) {

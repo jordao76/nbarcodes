@@ -96,7 +96,7 @@ namespace NBarCodes.Tests {
 
       // pixels
       AssertFloat(300, UnitConverter.ConvertDpi(96, BarCodeUnit.Pixel, 96, 300));
-      AssertFloat(1035, UnitConverter.ConvertDpi(331, BarCodeUnit.Pixel, 96, 300));
+      AssertFloat(1034.375f, UnitConverter.ConvertDpi(331, BarCodeUnit.Pixel, 96, 300));
 
     }
 
@@ -120,11 +120,11 @@ namespace NBarCodes.Tests {
       int dpi = 96;
       foreach (float value in values) {
         float temp = value;
-        temp = ChainConversions(temp, dpi, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter);
+        temp = ChainConversions(temp, dpi, BarCodeUnit.Centimeter, BarCodeUnit.Pixel, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter);
         AssertFloat(value, temp, epsilons[index]);
 
         temp = value;
-        temp = ChainConversions(temp, dpi, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Inch);
+        temp = ChainConversions(temp, dpi, BarCodeUnit.Inch, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Pixel, BarCodeUnit.Millimeter, BarCodeUnit.Centimeter, BarCodeUnit.Inch, BarCodeUnit.Centimeter, BarCodeUnit.Inch);
         AssertFloat(value, temp, epsilons[index]);
 
         ++index;

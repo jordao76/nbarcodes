@@ -27,8 +27,8 @@
 
         <div>
             <nbc:BarCodeControl id="BarCodeControl1" runat="server" 
-                BackColor="LightSteelBlue" BarColor="Orange" Font="Comic Sans MS, 9pt, style=Bold"
-                FontColor="ForestGreen" QuietZone="5"></nbc:BarCodeControl>
+                BackColor="LightSteelBlue" BarColor="Orange" Font="Comic Sans MS, 15pt, style=Bold"
+                FontColor="ForestGreen"></nbc:BarCodeControl>
         </div>
     
     </div>

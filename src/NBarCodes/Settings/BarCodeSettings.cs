@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Drawing;
-using System.Web.UI.WebControls;
 
 namespace NBarCodes {
 
@@ -35,7 +32,7 @@ namespace NBarCodes {
     public BarCodeUnit Unit {
       get { return _unit; }
       set { _unit = value; }
-    } BarCodeUnit _unit = BarCodeUnit.Inch;
+    } BarCodeUnit _unit = Defaults.Unit;
 
     /// <summary>
     /// The DPI (dots per inch) of the barcode.
@@ -43,7 +40,7 @@ namespace NBarCodes {
     public int Dpi {
       get { return _dpi; }
       set { _dpi = value; }
-    } int _dpi = UnitConverter.ScreenDpi;
+    } int _dpi = Defaults.Dpi;
 
     /// <summary>
     /// The back color of the barcode.
@@ -51,7 +48,7 @@ namespace NBarCodes {
     public Color BackColor { 
       get { return _backColor; } 
       set { _backColor = value; }
-    } Color _backColor = Color.White;
+    } Color _backColor = Defaults.BackColor;
 
     /// <summary>
     /// The color of the bar of the barcode.
@@ -59,7 +56,7 @@ namespace NBarCodes {
     public Color BarColor {
       get { return _barColor; } 
       set { _barColor = value; }
-    } Color _barColor = Color.Black;
+    } Color _barColor = Defaults.BarColor;
 
     /// <summary>
     /// The height of the barcode. Affected by <see cref="Unit"/>.
@@ -67,7 +64,7 @@ namespace NBarCodes {
     public float BarHeight {
       get { return _barHeight; } 
       set { _barHeight = value; }
-    } float _barHeight = 50f / 96f;
+    } float _barHeight = Defaults.BarHeight;
 
     /// <summary>
     /// The color of the font to render text in the barcode.
@@ -75,7 +72,7 @@ namespace NBarCodes {
     public Color FontColor { 
       get { return _fontColor; } 
       set { _fontColor = value; }
-    } Color _fontColor = Color.Black;
+    } Color _fontColor = Defaults.FontColor;
 
     /// <summary>
     /// The height of the extra height of the bar for EAN like barcodes.
@@ -84,7 +81,7 @@ namespace NBarCodes {
     public float GuardExtraHeight {
       get { return _guardExtraHeight; } 
       set { _guardExtraHeight = value; }
-    } float _guardExtraHeight = 10f / 96f;
+    } float _guardExtraHeight = Defaults.GuardExtraHeight;
 
     /// <summary>
     /// The width of bar of the barcode for module-based barcodes (<see cref="ModuleBarCode"/>).
@@ -93,7 +90,7 @@ namespace NBarCodes {
     public float ModuleWidth {
       get { return _moduleWidth; } 
       set { _moduleWidth = value; }
-    } float _moduleWidth = .02f;
+    } float _moduleWidth = Defaults.ModuleWidth;
 
     /// <summary>
     /// The width of the narrow component of a thickness-based barcode (<see cref="ThicknessBarCode"/>).
@@ -102,7 +99,7 @@ namespace NBarCodes {
     public float NarrowWidth {
       get { return _narrowWidth; } 
       set { _narrowWidth = value; }
-    } float _narrowWidth = .02f;
+    } float _narrowWidth = Defaults.NarrowWidth;
 
     /// <summary>
     /// The width of the wide component of a thickness-based barcode (<see cref="ThicknessBarCode"/>).
@@ -111,7 +108,7 @@ namespace NBarCodes {
     public float WideWidth {
       get { return _wideWidth; } 
       set { _wideWidth = value; }
-    } float _wideWidth = .06f;
+    } float _wideWidth = Defaults.WideWidth;
 
     /// <summary>
     /// The vertical (top and bottom) offset height of the barcode to the border.
@@ -120,7 +117,7 @@ namespace NBarCodes {
     public float OffsetHeight {
       get { return _offsetHeight; } 
       set { _offsetHeight = value; }
-    } float _offsetHeight = 5f / 96f;
+    } float _offsetHeight = Defaults.OffsetHeight;
 
     /// <summary>
     /// The horizontal (left and right) offset width of the barcode to the border.
@@ -129,16 +126,7 @@ namespace NBarCodes {
     public float OffsetWidth {
       get { return _offsetWidth; } 
       set { _offsetWidth = value; }
-    } float _offsetWidth = 5f / 96f;
-
-    /// <summary>
-    /// The width of the horizontal (left and right) quiet zone of the barcode.
-    /// Affected by <see cref="Unit"/>.
-    /// </summary>
-    public float QuietZone {
-      get { return _quietZone; } 
-      set { _quietZone = value; }
-    } float _quietZone = 0;
+    } float _offsetWidth = Defaults.OffsetWidth;
 
     /// <summary>
     /// The font used to render the text inside the barcode.
@@ -146,7 +134,7 @@ namespace NBarCodes {
     public Font Font {
       get { return _font; } 
       set { _font = value; }
-    } Font _font = new Font("verdana", 15);
+    } Font _font = Defaults.Font;
 
     /// <summary>
     /// The position of the text rendered in the barcode.
@@ -154,7 +142,7 @@ namespace NBarCodes {
     public TextPosition TextPosition {
       get { return _textPosition; } 
       set { _textPosition = value; }
-    } TextPosition _textPosition = TextPosition.Bottom;
+    } TextPosition _textPosition = Defaults.TextPos;
 
     /// <summary>
     /// Whether the barcode will use an (optional) checksum.

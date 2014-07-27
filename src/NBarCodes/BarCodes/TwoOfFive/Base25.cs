@@ -1,8 +1,6 @@
 using System;
-using System.Drawing;
-using System.Text.RegularExpressions;
 using System.Collections;
-using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace NBarCodes {
 
@@ -25,7 +23,6 @@ namespace NBarCodes {
       }
     }
 
-    [DefaultValue(true), NotifyParentProperty(true)]
     public bool UseChecksum {
       get { return useChecksum; }
       set { useChecksum = value; }
