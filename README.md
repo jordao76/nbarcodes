@@ -12,22 +12,28 @@ To use the NBarCodes ASP.NET control, you can follow these steps:
 
 *Step 2.* Register the barcode HTTP handler on the relevant section (configuration/system.webServer) of the web.config file:
 
-    <handlers>
-      <add verb="GET" path="BarCodeHandler.axd" name="BarCodeHandler"
-        type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
-    </handlers>
+```xml
+<handlers>
+  <add verb="GET" path="BarCodeHandler.axd" name="BarCodeHandler"
+    type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
+</handlers>
+```
 
 The barcode control uses this handler to generate the barcode image.
 
 *Step 3.* In the ASP.NET page that you want to use the control, add it by first registering its namespace on the top of the page:
 
-    <%@ Register TagPrefix="nbc" Namespace="NBarCodes.WebUI"
-      Assembly="NBarCodes" %>
+```xml
+<%@ Register TagPrefix="nbc" Namespace="NBarCodes.WebUI"
+  Assembly="NBarCodes" %>
+```
 
 And then include the control in the page hierarchy:
 
-    <nbc:BarCodeControl id="BarCodeControl1" runat="server"
-      Data="NBarCodes" Type="Code128" />
+```xml
+<nbc:BarCodeControl id="BarCodeControl1" runat="server"
+  Data="NBarCodes" Type="Code128" />
+```
 
 You can work with the control programmatically or using the designer surface.
 
@@ -57,41 +63,45 @@ You can then generate barcode images with code like the following:
 
 (C#)
 
-    using NBarCodes;
+```csharp
+using NBarCodes;
 
-    ...
+...
 
-    var settings = new BarCodeSettings { 
-      Type = BarCodeType.Code128, 
-      Data = "NBarCodes" 
-    };
+var settings = new BarCodeSettings { 
+  Type = BarCodeType.Code128, 
+  Data = "NBarCodes" 
+};
 
-    var generator = new BarCodeGenerator(settings);
+var generator = new BarCodeGenerator(settings);
 
-    using (var barcodeImage = generator.GenerateImage()) {
+using (var barcodeImage = generator.GenerateImage()) {
 
-      // use the generated barcodeImage
+  // use the generated barcodeImage
 
-    }
+}
+```
 
 (VB.NET)
 
-    Imports NBarCodes
+```vbnet
+Imports NBarCodes
 
-    ...
+...
 
-    Dim settings = New BarCodeSettings With {
-      .Type = BarCodeType.Code128,
-      .Data = "NBarCodes"
-    }
+Dim settings = New BarCodeSettings With {
+  .Type = BarCodeType.Code128,
+  .Data = "NBarCodes"
+}
 
-    Dim generator = New BarCodeGenerator(settings)
+Dim generator = New BarCodeGenerator(settings)
 
-    Using barcodeImage = generator.GenerateImage()
+Using barcodeImage = generator.GenerateImage()
 
-      ' use the generated barcodeImage '
+  ' use the generated barcodeImage
 
-    End Using
+End Using
+```
 
 The `BarCodeSettings` object holds the barcode information. This class has many properties that affect the rendering of the barcode, like the barcode type, the data to render, bar measures, text position and colors. Required properties are simply `Type`, for the barcode type, and `Data`, for the data to render. The `BarCodeGenerator` class is used to generate the right barcode from the provided barcode settings.
 
