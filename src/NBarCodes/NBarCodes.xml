@@ -960,7 +960,6 @@
         <member name="T:NBarCodes.WebUI.BarCodeControl">
             <Documentation for="BarCodeControl">
 
-
 <summary>
 	A control to generate bar codes.
 </summary>
@@ -980,16 +979,17 @@
   
   <code>
 
-    <httpHandlers>
-      <add verb="GET" path="BarCodeHandler.axd" type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
-    </httpHandlers>
+    <system.webServer>
+      <handlers>
+        <add verb="GET" path="BarCodeHandler.axd" name="BarCodeHandler" type="NBarCodes.WebUI.BarCodeHandler, NBarCodes"/>
+      </handlers>
+    </system.webServer>
 
   </code>
   
 </para>
 
 </remarks>
-
 
 </Documentation>
         </member>
