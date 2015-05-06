@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
+
+  <PropertyGroup Condition=" '$(BuildConfiguration)' == '' ">
+    <BuildConfiguration>Release</BuildConfiguration>
+  </PropertyGroup>
+
+  <Target Name="Clean">
+    <DeleteTree Directories="**\obj\**;**\bin\**" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Clean">
+    <ItemGroup>
+      <ProjectFiles Include="$(MSBuildProjectDirectory)\**\*.sln">
+        <Properties>Configuration=$(BuildConfiguration)</Properties>
+      </ProjectFiles>
+    </ItemGroup>
+    <MSBuild Projects="@(ProjectFiles)" />
+  </Target>
+
+  <Target Name="Test" DependsOnTargets="Compile">
+    <ItemGroup>
+      <TestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\$(BuildConfiguration)\*.Tests.dll" />
+    </ItemGroup>
+    <NUnit ToolPath="packages\NUnit.Runners.2.6.4\tools" Assemblies="@(TestAssemblies)" />
+  </Target>
+
+  <Target Name="Build">
+    <CallTarget Targets="Test" />
+  </Target>
+
+</Project>
