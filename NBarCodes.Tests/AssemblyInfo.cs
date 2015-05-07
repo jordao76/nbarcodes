@@ -9,12 +9,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("NBarCodes tests.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyProduct("NBarCodes")]
 [assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão, all rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("3.0.0.*")]
+[assembly: AssemblyVersion("3.0.1.*")]
 
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]

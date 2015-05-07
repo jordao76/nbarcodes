@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using NUnit.Framework;
 
 namespace NBarCodes.Tests {
 
@@ -34,31 +33,6 @@ namespace NBarCodes.Tests {
       settings.UseChecksum = true;
 
       return settings;
-    }
-
-    /// <summary>
-    /// Asserts that two <see cref="IBarCodeSettings"/> are property-wise equal.
-    /// </summary>
-    /// <param name="expected">Expected settings.</param>
-    /// <param name="actual">Actual settings.</param>
-    public static void AssertSettingsEqual(IBarCodeSettings expected, IBarCodeSettings actual) {
-      Assert.AreEqual(expected.Type, actual.Type);
-      Assert.AreEqual(expected.Data, actual.Data);
-      Assert.AreEqual(expected.Unit, actual.Unit);
-      Assert.AreEqual(expected.Dpi, actual.Dpi);
-      Assert.AreEqual(expected.BackColor.ToArgb(), actual.BackColor.ToArgb());
-      Assert.AreEqual(expected.BarColor.ToArgb(), actual.BarColor.ToArgb());
-      Assert.AreEqual(expected.BarHeight, actual.BarHeight);
-      Assert.AreEqual(expected.FontColor.ToArgb(), actual.FontColor.ToArgb());
-      Assert.AreEqual(expected.GuardExtraHeight, actual.GuardExtraHeight);
-      Assert.AreEqual(expected.ModuleWidth, actual.ModuleWidth);
-      Assert.AreEqual(expected.NarrowWidth, actual.NarrowWidth);
-      Assert.AreEqual(expected.WideWidth, actual.WideWidth);
-      Assert.AreEqual(expected.OffsetHeight, actual.OffsetHeight);
-      Assert.AreEqual(expected.OffsetWidth, actual.OffsetWidth);
-      Assert.AreEqual(expected.Font, actual.Font);
-      Assert.AreEqual(expected.TextPosition, actual.TextPosition);
-      Assert.AreEqual(expected.UseChecksum, actual.UseChecksum);
     }
 
   }
