@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NBarCodes")]
-[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão, all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

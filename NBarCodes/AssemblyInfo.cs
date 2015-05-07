@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 
 [assembly: AssemblyTitle("NBarCodes")]
-[assembly: AssemblyDescription("API to generate 1D barcodes.")]
+[assembly: AssemblyDescription(".NET library to generate common 1D barcodes")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NBarCodes")]
-[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão, all rights reserved.")]
+[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

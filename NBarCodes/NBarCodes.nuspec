@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>NBarCodes</id>
-    <version>3.0.1</version>
+    <id>$id$</id>
+    <version>$version$</version>
     <authors>Rodrigo Santana Jordão</authors>
     <licenseUrl>https://github.com/jordao76/nbarcodes/blob/master/LICENSE.txt</licenseUrl>
     <projectUrl>https://github.com/jordao76/nbarcodes</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>.NET library to generate common 1D barcodes</description>
+    <description>$description$</description>
     <copyright>Copyright(c) 2003</copyright>
     <tags>barcodes</tags>
     <frameworkAssemblies>
