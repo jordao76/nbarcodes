@@ -4,34 +4,34 @@
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(BuildConfiguration)' == '' ">
-    <BuildConfiguration>Release</BuildConfiguration>
-  </PropertyGroup>
-
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
 
   <Target Name="Clean">
     <DeleteTree Directories="**\obj\**;**\bin\**" />
   </Target>
 
-  <Target Name="Compile" DependsOnTargets="Clean">
+  <Target Name="Compile">
     <ItemGroup>
-      <ProjectFiles Include="$(MSBuildProjectDirectory)\**\*.sln">
-        <Properties>Configuration=$(BuildConfiguration)</Properties>
-      </ProjectFiles>
+      <ConfigurationList Include="Release.net20;Release.net30;Release.net35;Release.net35-client;Release.net40;Release.net40-client" />
     </ItemGroup>
-    <MSBuild Projects="@(ProjectFiles)" />
+    <MSBuild Projects="$(MSBuildProjectDirectory)\NBarCodes\NBarCodes.csproj" BuildInParallel="true"
+      Properties="Configuration=%(ConfigurationList.Identity);OutputPath=bin\%(ConfigurationList.Identity)\" />
   </Target>
 
-  <Target Name="Test" DependsOnTargets="Compile">
+  <Target Name="CompileTest">
+    <MSBuild Projects="$(MSBuildProjectDirectory)\NBarCodes.sln" BuildInParallel="true"
+      Properties="Configuration=Release;OutputPath=bin\Release\" />
+  </Target>
+
+  <Target Name="RunTest" DependsOnTargets="CompileTest">
     <ItemGroup>
-      <TestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\$(BuildConfiguration)\*.Tests.dll" />
+      <TestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\Release\*.Tests.dll" />
     </ItemGroup>
     <NUnit ToolPath="packages\NUnit.Runners.2.6.4\tools" Assemblies="@(TestAssemblies)" />
   </Target>
 
   <Target Name="Build">
-    <CallTarget Targets="Test" />
+    <CallTarget Targets="Clean;Compile;RunTest" />
   </Target>
 
 </Project>

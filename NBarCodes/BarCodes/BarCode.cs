@@ -197,7 +197,6 @@ namespace NBarCodes {
       }
     }
 
-    // TODO: Extra permissions!!
     public void SaveImage(string data, string fileName, ImageFormat format) {
       if (string.IsNullOrEmpty(data)) throw new BarCodeFormatException("No data to render.");
       using (var barCode = DrawImage(data)) {

@@ -4,6 +4,7 @@
 # build
 obj
 bin
+NBarCodes.xml
 
 # nuget
 *.nupkg

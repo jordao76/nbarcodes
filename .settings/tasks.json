@@ -10,16 +10,12 @@
 	"version": "0.1.0",
 	"command": "msbuild",
 	"args": [
-		"Build.proj",
+		"NBarCodes.sln",
 		"/property:GenerateFullPaths=true"
 	],
 	"taskSelector": "/t:",
 	"showOutput": "silent",
 	"tasks": [
-		{
-			"taskName": "clean",
-			"showOutput": "silent"
-		},
 		{
 			"taskName": "build",
 			"showOutput": "silent",
