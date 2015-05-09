@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>Copyright(c) 2003</copyright>
-    <tags>barcodes</tags>
+    <tags>barcodes barcode code128 code39 standard2of5 interleaved2of5 ean13 ean8 upca upce</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Drawing" />
     </frameworkAssemblies>
