@@ -6,4 +6,4 @@ build:
 
 after_build:
   nuget pack NBarCodes\NBarCodes.csproj -Prop Configuration=Release.net40
-  ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
