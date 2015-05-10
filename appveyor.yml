@@ -9,8 +9,6 @@ after_build:
 
 deploy:
   provider: NuGet
-  server:
-  api_key:
-    secure: MrOScjNHj69M+TTu43AvpaS2U1x4jQRQdkTC0Yy8LwvNvuSNfsLX/Kome9pI3fP5
+  server: https://ci.appveyor.com/nuget/nbarcodes-64eqopuy46hq
   skip_symbols: true
   artifact: /.*\.nupkg/
