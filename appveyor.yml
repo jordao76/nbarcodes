@@ -6,3 +6,10 @@ build:
 
 after_build:
   nuget pack NBarCodes\NBarCodes.csproj -Prop Configuration=Release.net40
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: MrOScjNHj69M+TTu43AvpaS2U1x4jQRQdkTC0Yy8LwvNvuSNfsLX/Kome9pI3fP5
+  skip_symbols: true
+  artifact: /.*\.nupkg/
