@@ -1,8 +1,6 @@
 before_build:
   nuget restore
 
-configuration: AppVeyor
-
 build:
   project: Build.proj
 

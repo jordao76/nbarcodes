@@ -1,3 +1,3 @@
 @echo off
 
-msbuild Build.proj
+msbuild Build.proj /t:Build
