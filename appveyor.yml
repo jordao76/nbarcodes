@@ -1,5 +1,10 @@
 before_build:
   nuget restore
 
+configuration: AppVeyor
+
 build:
   project: Build.proj
+
+after_build:
+  nuget pack NBarCodes\NBarCodes.csproj -Prop Configuration=Release.net40

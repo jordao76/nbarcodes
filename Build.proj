@@ -10,7 +10,7 @@
     <DeleteTree Directories="**\obj\**;**\bin\**" />
   </Target>
 
-  <Target Name="Compile">
+  <Target Name="NuGetCompile">
     <ItemGroup>
       <ConfigurationList Include="Release.net20;Release.net30;Release.net35;Release.net35-client;Release.net40;Release.net40-client" />
     </ItemGroup>
@@ -18,20 +18,24 @@
       Properties="Configuration=%(ConfigurationList.Identity);OutputPath=bin\%(ConfigurationList.Identity)\" />
   </Target>
 
-  <Target Name="CompileTest">
+  <Target Name="TestCompile">
     <MSBuild Projects="$(MSBuildProjectDirectory)\NBarCodes.sln" BuildInParallel="true"
       Properties="Configuration=Release;OutputPath=bin\Release\" />
   </Target>
 
-  <Target Name="RunTest" DependsOnTargets="CompileTest">
+  <Target Name="RunTest" DependsOnTargets="TestCompile">
     <ItemGroup>
       <TestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\Release\*.Tests.dll" />
     </ItemGroup>
     <NUnit ToolPath="packages\NUnit.Runners.2.6.4\tools" Assemblies="@(TestAssemblies)" />
   </Target>
 
+  <Target Name="AppVeyor">
+    <CallTarget Targets="NuGetCompile;TestCompile" />
+  </Target>
+
   <Target Name="Build">
-    <CallTarget Targets="Clean;Compile;RunTest" />
+    <CallTarget Targets="Clean;RunTest" />
   </Target>
 
 </Project>

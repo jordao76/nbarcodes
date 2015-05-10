@@ -14,6 +14,8 @@ namespace NBarCodes.Tests {
   [Category("Acceptance")]
   public class BarCodeFixture {
 
+    // enable this constant to save the input generated barcodes
+    #if SAVE_BARCODES
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
     public void BarCodeGenerationRaw(BarCodeTestInput input) {
       int dpi = 120;
@@ -35,12 +37,13 @@ namespace NBarCodes.Tests {
       string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
       return Regex.Replace(name, invalidRegStr, "_");
     }
+    #endif
 
     [Test, TestCaseSource(typeof(BarCodeTestCaseFactory), "LoadTestCases")]
     public void BarCodeGenerationTest(BarCodeTestInput input) {
       Trace.WriteLine(string.Format("Testing: {0}, {1}", input.Type, input.Data));
 
-      BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings { 
+      BarCodeGenerator generator = new BarCodeGenerator(new BarCodeSettings {
         Type = input.Type,
         Data = input.Data
       });
@@ -62,7 +65,7 @@ namespace NBarCodes.Tests {
   }
 
   class BarCodeTestCaseFactory {
-  
+
     public IEnumerable<TestCaseData> LoadTestCases() {
       var data = new List<TestCaseData>();
       foreach (var bcs in RetrieveTestData()) {
@@ -95,7 +98,7 @@ namespace NBarCodes.Tests {
     }
 
     private BarCodeTestInput ParseInput(string input) {
-      // expected format: 
+      // expected format:
       // "[Barcode reader], [Barcode type], [Barcode data], [Expected output]"
       // e.g.: "ZXing, Code128, 1234567890"
       // comments take a WHOLE line and begin with '#'
