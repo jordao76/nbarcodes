@@ -6,7 +6,9 @@ using System.IO;
 using System.Reflection;
 using NBarCodes.Tests.Readers;
 using NUnit.Framework;
+#if SAVE_BARCODES
 using System.Text.RegularExpressions;
+#endif
 
 namespace NBarCodes.Tests {
 

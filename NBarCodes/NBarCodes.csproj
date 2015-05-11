@@ -5,7 +5,7 @@
     <ProductVersion>8.0.30319</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{818A6862-6B8B-4F93-826E-D0CD8844BBA4}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release.net40</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug.net40</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ApplicationIcon />
     <AssemblyKeyContainerName />

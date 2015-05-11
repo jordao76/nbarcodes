@@ -19,7 +19,7 @@
   </Target>
 
   <Target Name="TestCompile">
-    <MSBuild Projects="$(MSBuildProjectDirectory)\NBarCodes.sln" BuildInParallel="true"
+    <MSBuild Projects="$(MSBuildProjectDirectory)\NBarCodes.sln"
       Properties="Configuration=Release;OutputPath=bin\Release\" />
   </Target>
 
@@ -30,8 +30,12 @@
     <NUnit ToolPath="packages\NUnit.Runners.2.6.4\tools" Assemblies="@(TestAssemblies)" />
   </Target>
 
+  <Target Name="NuGet">
+    <CallTarget Targets="Clean;NuGetCompile" />
+  </Target>
+
   <Target Name="AppVeyor">
-    <CallTarget Targets="NuGetCompile;TestCompile" />
+    <CallTarget Targets="TestCompile" />
   </Target>
 
   <Target Name="Build">
