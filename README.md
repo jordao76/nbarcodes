@@ -31,3 +31,7 @@ using (var barcodeImage = generator.GenerateImage()) {
 The `BarCodeSettings` object holds the barcode information. This class has many properties that affect the rendering of the barcode, like the barcode type, the data to render, bar measures, text position and colors. Required properties are simply `Type`, for the barcode type, and `Data`, for the data to render. The `BarCodeGenerator` class is used to generate the right barcode from the provided barcode settings.
 
 A `BarCodeFormatException` can be thrown if the settings provided have errors for the target barcode. The settings can be checked before calling `GenerateImage` with the method `TestRender` on the `BarCodeGenerator` class.
+
+## License
+
+Licensed under the [MIT license](https://github.com/jordao76/nbarcodes/blob/master/LICENSE.txt).
