@@ -37,16 +37,16 @@ namespace NBarCodes.Tests {
       // mm to px
       temp = UnitConverter.Convert(1, BarCodeUnit.Inch, BarCodeUnit.Millimeter, dpi);
       AssertFloat(dpi, UnitConverter.Convert(temp, BarCodeUnit.Millimeter, BarCodeUnit.Pixel, dpi));
-      
+
       // in to cm
       AssertFloat(1432.56f, UnitConverter.Convert(564, BarCodeUnit.Inch, BarCodeUnit.Centimeter, dpi));
       // in to mm
-      AssertFloat(14325.6f, UnitConverter.Convert(564, BarCodeUnit.Inch, BarCodeUnit.Millimeter, dpi));
+      AssertFloat(14325.6f, UnitConverter.Convert(564, BarCodeUnit.Inch, BarCodeUnit.Millimeter, dpi), 0.001f);
       // in to in
       AssertFloat(14325.6f, UnitConverter.Convert(14325.6f, BarCodeUnit.Inch, BarCodeUnit.Inch, dpi));
       // in to px
       AssertFloat(dpi, UnitConverter.Convert(1, BarCodeUnit.Inch, BarCodeUnit.Pixel, dpi));
-      
+
       // px to cm
       temp = UnitConverter.Convert(dpi, BarCodeUnit.Pixel, BarCodeUnit.Centimeter, dpi);
       AssertFloat(1, UnitConverter.Convert(temp, BarCodeUnit.Centimeter, BarCodeUnit.Inch, dpi));
@@ -102,7 +102,7 @@ namespace NBarCodes.Tests {
 
       // 60 is for old CRTs, so this might be a safe assumption
       Assert.True(UnitConverter.ScreenDpi > 60);
-    
+
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ namespace NBarCodes.Tests {
       if (expected - epsilon <= actual && actual <= expected + epsilon) {
         return;
       }
-      Assert.Fail("Actual value {0:0.00000} not within bounds of expected value {1:0.00000}", actual, expected);
+      Assert.Fail("Actual value {0:0.00000} not within bounds of expected value {1:0.00000}, using epsilon {2:0.00000}", actual, expected, epsilon);
     }
 
     /// <summary>
@@ -172,4 +172,3 @@ namespace NBarCodes.Tests {
   }
 
 }
-
