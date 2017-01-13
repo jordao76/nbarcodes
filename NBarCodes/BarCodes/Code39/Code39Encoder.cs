@@ -68,6 +68,13 @@ namespace NBarCodes {
       return bits;
     }
 
+    public static bool CanEncode(string data) {
+      foreach (char datum in data) {
+        if (datum == '*' || !symbols.ContainsKey(datum)) return false;
+      }
+      return true;
+    }
+
   }
 
   class Code39Translator {
@@ -85,21 +92,21 @@ namespace NBarCodes {
     private readonly static string[] mapping;
 
     static Code39Translator() {
-      mapping = new string[] {
-        "%U", "$A", "$B", "$C", "$D", "$E", "$F", "$G", "$H", "$I", 
-        "$J", "$K", "$L", "$M", "$N", "$O", "$P", "$Q", "$R", "$S", 
-        "$T", "$U", "$V", "$W", "$X", "$Y", "$Z", "%A", "%B", "%C", 
-        "%D", "%E", " ", "/A", "/B", "/C", "/D", "/E", "/F", "/G", 
-        "/H", "/I", "/J", "/K", "/L", "-", ".", "/O", "0", "1", 
-        "2", "3", "4", "5", "6", "7", "8", "9", "/Z", "%F", 
-        "%G", "%H", "%I", "%J", "%V", "A", "B", "C", "D", "E", 
-        "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", 
-        "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", 
-        "Z", "%K", "%L", "%M", "%N", "%O", "%W", "+A", "+B", "+C", 
-        "+D", "+E", "+F", "+G", "H", "+I", "+J", "+K", "+L", "+M", 
-        "+N", "+O", "+P", "+Q", "+R", "+S", "+T", "+U", "+V", "+W", 
-        "+X", "+Y", "+Z", "%P", "%Q", "%R", "%S",
-        "%T" // <- DEL, could also be encoded as %X, %Y, %Z
+      mapping = new string[] { // indexed by ascii code
+        "%U", "$A", "$B", "$C", "$D", "$E", "$F", "$G", "$H", "$I", // 0-9
+        "$J", "$K", "$L", "$M", "$N", "$O", "$P", "$Q", "$R", "$S", // 10-19
+        "$T", "$U", "$V", "$W", "$X", "$Y", "$Z", "%A", "%B", "%C", // 20-29
+        "%D", "%E", " ",  "/A", "/B", "/C", "/D", "/E", "/F", "/G", // 30-39
+        "/H", "/I", "/J", "/K", "/L", "-",  ".",  "/O", "0",  "1",  // 40-49
+        "2",  "3",  "4",  "5",  "6",  "7",  "8",  "9",  "/Z", "%F", // 50-59
+        "%G", "%H", "%I", "%J", "%V", "A",  "B",  "C",  "D",  "E",  // 60-69
+        "F",  "G",  "H",  "I",  "J",  "K",  "L",  "M",  "N",  "O",  // 70-79
+        "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y",  // 80-89
+        "Z",  "%K", "%L", "%M", "%N", "%O", "%W", "+A", "+B", "+C", // 90-99
+        "+D", "+E", "+F", "+G", "+H", "+I", "+J", "+K", "+L", "+M", // 100-109
+        "+N", "+O", "+P", "+Q", "+R", "+S", "+T", "+U", "+V", "+W", // 110-119
+        "+X", "+Y", "+Z", "%P", "%Q", "%R", "%S",                   // 120-126
+        "%T" // <- 127 - DEL, could also be encoded as %X, %Y, %Z
       };
     }
 

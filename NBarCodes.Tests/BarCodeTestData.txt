@@ -85,7 +85,10 @@ ZXing, Upce, 01234500009, 01234596
 ZXing, Code39, 1234567890
 ZXing, Code39, 0123456789
 ZXing, Code39, ABCDEFGHIJKLMNOPQRSTUVWXYZ
+# non-extended punctuation
 ZXing, Code39, -. $/+%
+# with an extended char (*)
+ZXing, Code39, -. *$/+%
 # https://github.com/jordao76/nbarcodes/issues/3
 ZXing, Code39, C000-065-PA
 # https://github.com/jordao76/nbarcodes/issues/4
@@ -93,6 +96,19 @@ ZXing, Code39, 6084010260528
 # https://github.com/jordao76/nbarcodes/issues/7
 ZXing, Code39, C003-718-FS
 ZXing, Code39, 16-01495
+# https://github.com/jordao76/nbarcodes/issues/8
+ZXing, Code39, %
+# extended chars - lowercase letters
+ZXing, Code39, abcdefghijklmnopqrstuvwxyz
+# extended chars - punctuation (no comma)
+ZXing, Code39, ! "#
+ZXing, Code39, $%&'
+ZXing, Code39, ()*+
+ZXing, Code39, -./:
+ZXing, Code39, ;<=>?
+#ZXing, Code39, @[\]
+#ZXing, Code39, ^_`
+#ZXing, Code39, {|}~
 
 #ZBar, PostNet, 12345
 #ZBar, PostNet, 123456789

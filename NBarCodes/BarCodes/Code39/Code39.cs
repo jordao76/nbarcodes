@@ -36,8 +36,10 @@ namespace NBarCodes {
       // store the current data
       string oldData = data;
 
-      // translate the extended characters
-      data = Code39Translator.TranslateExtended(data);
+      if (!Code39Encoder.CanEncode(data)) {
+        // translate the extended characters
+        data = Code39Translator.TranslateExtended(data);
+      }
 
       data = AppendChecksum(data);
 
