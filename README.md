@@ -1,4 +1,4 @@
-#NBarCodes
+# NBarCodes
 
 [![NuGet version](http://img.shields.io/nuget/v/NBarCodes.svg)](https://www.nuget.org/packages/NBarCodes/)
 [![AppVeyor build](https://img.shields.io/appveyor/ci/jordao76/nbarcodes.svg)](https://ci.appveyor.com/project/jordao76/nbarcodes)
@@ -6,7 +6,7 @@
 
 **NBarCodes** is a .NET library to generate common one-dimensional barcodes. Supported barcode types include Code 128, Code 39, Standard 2 of 5, Interleaved 2 of 5, EAN-13, EAN-8, UPC-A, UPC-E and Postnet.
 
-##Quick intro
+## Quick intro
 
 ![NBarCodes](NBarCodes.png)
 
