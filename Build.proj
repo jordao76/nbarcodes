@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="AppVeyor" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.5.0.235\tools</MSBuildCommunityTasksPath>
   </PropertyGroup>
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
@@ -27,7 +27,7 @@
     <ItemGroup>
       <TestAssemblies Include="$(MSBuildProjectDirectory)\**\bin\Release\*.Tests.dll" />
     </ItemGroup>
-    <NUnit ToolPath="packages\NUnit.Runners.2.6.4\tools" Assemblies="@(TestAssemblies)" />
+    <NUnit3 ToolPath="packages\NUnit.ConsoleRunner.3.7.0\tools" Assemblies="@(TestAssemblies)" />
   </Target>
 
   <Target Name="NuGet">

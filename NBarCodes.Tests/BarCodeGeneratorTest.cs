@@ -16,9 +16,9 @@ namespace NBarCodes.Tests {
     /// Tests passing a null argument to the contructor of <see cref="BarCodeGenerator"/>.
     /// </summary>
     [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
     public void TestNullSettings() {
-      new BarCodeGenerator(null);
+      Assert.Throws<ArgumentNullException>(() =>
+        new BarCodeGenerator(null));
     }
 
     #endregion
@@ -65,10 +65,11 @@ namespace NBarCodes.Tests {
     /// Tests an invalid rendering of a barcode.
     /// </summary>
     [Test]
-    [ExpectedException(typeof(BarCodeFormatException))]
     public void TestInvalidImage() {
       BarCodeGenerator generator = MakeInvalidGenerator();
-      using (generator.GenerateImage()) { }
+      Assert.Throws<BarCodeFormatException>(() => {
+        using (generator.GenerateImage()) { }
+      });
     }
 
     /// <summary>

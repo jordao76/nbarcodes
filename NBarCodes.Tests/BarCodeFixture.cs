@@ -74,7 +74,7 @@ namespace NBarCodes.Tests {
 
   class BarCodeTestCaseFactory {
 
-    public IEnumerable<TestCaseData> LoadTestCases() {
+    public static IEnumerable<TestCaseData> LoadTestCases() {
       var data = new List<TestCaseData>();
       foreach (var bcs in RetrieveTestData()) {
         data.Add(new TestCaseData(bcs).SetName(string.Format("{0} {1}", bcs.Type, bcs.Data)));
@@ -87,7 +87,7 @@ namespace NBarCodes.Tests {
     private const string TestDataResource = "NBarCodes.Tests.BarCodeTestData.txt";
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
-    private IEnumerable<BarCodeTestInput> RetrieveTestData() {
+    private static IEnumerable<BarCodeTestInput> RetrieveTestData() {
       var inputRead = new List<BarCodeTestInput>();
 
       using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(TestDataResource))
@@ -105,7 +105,7 @@ namespace NBarCodes.Tests {
       return inputRead;
     }
 
-    private BarCodeTestInput ParseInput(string input) {
+    private static BarCodeTestInput ParseInput(string input) {
       // expected format:
       // "[Barcode reader], [Barcode type], [Barcode data], [Expected output]"
       // e.g.: "ZXing, Code128, 1234567890"

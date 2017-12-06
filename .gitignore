@@ -1,5 +1,6 @@
 *.suo
 *.sln.cache
+.vs
 
 # build
 obj

@@ -60,9 +60,9 @@ namespace NBarCodes.Tests {
     /// Tests conversion from string with bad data to BitArray.
     /// </summary>
     [Test]
-    [ExpectedException(typeof(ArgumentException))]
     public void TestToBitArrayWrongData() {
-      BitArrayHelper.ToBitArray("10010010100102");
+      Assert.Throws<ArgumentException>(() => 
+        BitArrayHelper.ToBitArray("10010010100102"));
     }
 
     /// <summary>
