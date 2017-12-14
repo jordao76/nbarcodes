@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("NBarCodes")]
-[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Santana Jordão")]
+[assembly: AssemblyCopyright("Copyright(c) 2003 Rodrigo Jordão")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("3.0.2.*")]
+[assembly: AssemblyVersion("3.0.3.*")]
 
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
